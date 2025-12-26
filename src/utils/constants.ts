@@ -1,20 +1,17 @@
 /**
  * Données personnelles centralisées
- * Respecte le principe Single Source of Truth
- * 
- * ⚠️ À PERSONNALISER avec vos propres informations
  */
 
 export const PERSONAL_INFO = {
-  firstName: 'Prénom',
-  lastName: 'Nom',
-  fullName: 'Prénom Nom',
+  firstName: 'John',
+  lastName: 'Leveil',
+  fullName: 'John Leveil',
   title: 'Expert en Ingénierie du Logiciel',
-  email: 'prenom.nom@example.com',
+  email: 'leveiljohn@gmail.com',
   phone: '+33 6 XX XX XX XX',
   location: 'Paris, France',
-  profilePhoto: '/images/profile-photo.jpg',
-  profilePhotoAlt: 'Photo professionnelle de Prénom Nom',
+  profilePhoto: '/images/test.jpg',
+  profilePhotoAlt: 'Photo professionnelle de John Leveil',
 } as const;
 
 export const SOCIAL_LINKS = {
@@ -25,10 +22,10 @@ export const SOCIAL_LINKS = {
 } as const;
 
 export const SEO_DEFAULT = {
-  siteName: 'Portfolio - Prénom Nom',
-  description: 'Portfolio professionnel de Prénom Nom, Expert en Ingénierie du Logiciel',
+  siteName: 'Portfolio - John Leveil',
+  description: 'Portfolio professionnel de John Leveil, Expert en Ingénierie du Logiciel',
   keywords: ['portfolio', 'développeur', 'ingénierie logicielle', 'web'],
-  author: 'Prénom Nom',
+  author: 'John Leveil',
   language: 'fr',
   locale: 'fr_FR',
 } as const;
@@ -42,7 +39,6 @@ export const NAVIGATION_MENU = [
   { label: 'Contact', href: '/contact' },
 ] as const;
 
-// Nombre de compétences et réalisations (validation)
 export const CONTENT_REQUIREMENTS = {
   skillsCount: 10,
   skillsHumanMin: 4,

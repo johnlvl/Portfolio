@@ -1,0 +1,36 @@
+---
+import Navigation from '@components/Navigation.astro';
+import SEO from '@components/SEO.astro';
+import '../styles/global.css';
+import { PERSONAL_INFO } from '@utils/constants';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <SEO title={title} description={description} />
+  </head>
+  <body class="bg-neutral-50 text-neutral-900 antialiased">
+    <Navigation />
+    
+    <main class="pt-20">
+      <slot />
+    </main>
+
+    <footer class="border-t border-neutral-200 mt-24">
+      <div class="max-w-6xl mx-auto px-6 py-12">
+        <div class="text-center text-sm text-neutral-500">
+          <p>&copy; {new Date().getFullYear()} <span class="font-medium text-neutral-900">{PERSONAL_INFO.fullName}</span>. Tous droits réservés.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
