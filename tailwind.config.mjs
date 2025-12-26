@@ -4,16 +4,30 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Palette de couleurs du portfolio
-        primary: '#3B82F6',   // Bleu principal
-        secondary: '#10B981', // Vert secondaire
-        accent: '#F59E0B',    // Orange accent
-        dark: '#1F2937',      // Gris foncé
-        light: '#F9FAFB',     // Gris clair
+        neutral: {
+          50: '#FAFAFA',
+          100: '#F5F5F5',
+          200: '#E5E5E5',
+          300: '#D4D4D4',
+          400: '#A3A3A3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
+        },
+        accent: '#6366F1',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Menlo', 'monospace'],
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '70ch',
+          },
+        },
       },
     },
   },
