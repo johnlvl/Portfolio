@@ -1,0 +1,185 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Récupérer toutes les compétences et les trier par ordre
+const allSkills = await getCollection('skills');
+const sortedSkills = allSkills.sort((a, b) => a.data.order - b.data.order);
+
+// Séparer compétences techniques et humaines
+const technicalSkills = sortedSkills.filter(skill => skill.data.category === 'technique');
+const humanSkills = sortedSkills.filter(skill => skill.data.category === 'humaine');
+---
+
+<BaseLayout 
+  title="Compétences"
+  description="Découvrez mes 10 compétences techniques et humaines, organisées par domaine et niveau de maîtrise."
+>
+  <article class="py-20 px-6">
+    <div class="max-w-5xl mx-auto">
+      <!-- Header -->
+      <header class="mb-16 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
+          Mes compétences
+        </h1>
+        <p class="text-xl text-neutral-600 max-w-2xl mx-auto">
+          Une vision complète de mes compétences techniques et humaines, 
+          développées au fil de mes expériences professionnelles et projets personnels.
+        </p>
+      </header>
+
+      <!-- Synthèse graphique -->
+      <section class="mb-20">
+        <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-8">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-neutral-900 mb-2">Vue d'ensemble</h2>
+            <p class="text-neutral-600">
+              {technicalSkills.length} compétences techniques • {humanSkills.length} compétences humaines
+            </p>
+          </div>
+
+          <!-- Légende des niveaux -->
+          <div class="flex justify-center gap-6 mb-8 flex-wrap">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 rounded-full bg-neutral-300"></div>
+              <span class="text-sm text-neutral-600">Niveau 1-2 : Débutant</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 rounded-full bg-indigo-400"></div>
+              <span class="text-sm text-neutral-600">Niveau 3 : Intermédiaire</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 rounded-full bg-indigo-600"></div>
+              <span class="text-sm text-neutral-600">Niveau 4-5 : Avancé</span>
+            </div>
+          </div>
+
+          <!-- Visualisation simple des compétences -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-6">
+            {sortedSkills.map((skill) => (
+              <a 
+                href={`/competences/${skill.slug}`}
+                class="flex flex-col items-center p-4 bg-white border border-neutral-200 rounded-lg hover:shadow-lg hover:border-accent transition-all group"
+              >
+                <span class="text-4xl mb-2">{skill.data.icon}</span>
+                <span class="text-sm font-medium text-neutral-900 text-center mb-3 group-hover:text-accent transition-colors">
+                  {skill.data.title}
+                </span>
+                <div class="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <div 
+                      class={`w-2 h-2 rounded-full ${i < skill.data.level ? (skill.data.level <= 2 ? 'bg-neutral-300' : skill.data.level === 3 ? 'bg-indigo-400' : 'bg-indigo-600') : 'bg-neutral-200'}`}
+                    ></div>
+                  ))}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Compétences techniques -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-neutral-900 mb-8 flex items-center gap-3">
+          <span class="w-1 h-10 bg-accent"></span>
+          Compétences techniques
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          {technicalSkills.map((skill) => (
+            <a 
+              href={`/competences/${skill.slug}`}
+              class="group bg-white p-6 border border-neutral-200 rounded-lg hover:shadow-xl hover:border-accent transition-all"
+            >
+              <div class="flex items-start gap-4">
+                <span class="text-5xl">{skill.data.icon}</span>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-neutral-900 mb-2 group-hover:text-accent transition-colors">
+                    {skill.data.title}
+                  </h3>
+                  <p class="text-neutral-700 mb-4">
+                    {skill.data.description}
+                  </p>
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium text-neutral-600">Niveau :</span>
+                    <div class="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <div 
+                          class={`w-3 h-3 rounded-full ${i < skill.data.level ? (skill.data.level <= 2 ? 'bg-neutral-300' : skill.data.level === 3 ? 'bg-indigo-400' : 'bg-indigo-600') : 'bg-neutral-200'}`}
+                        ></div>
+                      ))}
+                    </div>
+                    <span class="text-sm text-neutral-600">({skill.data.level}/5)</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Compétences humaines -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-neutral-900 mb-8 flex items-center gap-3">
+          <span class="w-1 h-10 bg-accent"></span>
+          Compétences humaines
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          {humanSkills.map((skill) => (
+            <a 
+              href={`/competences/${skill.slug}`}
+              class="group bg-white p-6 border border-neutral-200 rounded-lg hover:shadow-xl hover:border-accent transition-all"
+            >
+              <div class="flex items-start gap-4">
+                <span class="text-5xl">{skill.data.icon}</span>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-neutral-900 mb-2 group-hover:text-accent transition-colors">
+                    {skill.data.title}
+                  </h3>
+                  <p class="text-neutral-700 mb-4">
+                    {skill.data.description}
+                  </p>
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium text-neutral-600">Niveau :</span>
+                    <div class="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <div 
+                          class={`w-3 h-3 rounded-full ${i < skill.data.level ? (skill.data.level <= 2 ? 'bg-neutral-300' : skill.data.level === 3 ? 'bg-indigo-400' : 'bg-indigo-600') : 'bg-neutral-200'}`}
+                        ></div>
+                      ))}
+                    </div>
+                    <span class="text-sm text-neutral-600">({skill.data.level}/5)</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <footer class="pt-12 border-t border-neutral-200">
+        <div class="text-center">
+          <p class="text-lg text-neutral-700 mb-6">
+            Envie de découvrir mes réalisations concrètes ?
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="/realisations" 
+              class="px-8 py-3 bg-neutral-900 text-white rounded-lg hover:bg-accent transition-colors font-medium"
+            >
+              Voir mes réalisations
+            </a>
+            <a 
+              href="/parcours" 
+              class="px-8 py-3 bg-white border-2 border-neutral-900 text-neutral-900 rounded-lg hover:bg-neutral-900 hover:text-white transition-colors font-medium"
+            >
+              Découvrir mon parcours
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>
