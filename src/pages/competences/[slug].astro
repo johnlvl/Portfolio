@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { withBase } from '@utils/url';
 
 export async function getStaticPaths() {
   const skills = await getCollection('skills');
@@ -44,9 +45,9 @@ const levelColor = skill.data.level <= 2 ? 'bg-neutral-300' :
       <!-- Fil d'Ariane -->
       <nav class="mb-8 text-sm">
         <ol class="flex items-center gap-2 text-neutral-600">
-          <li><a href="/" class="hover:text-accent transition-colors">Accueil</a></li>
+          <li><a href={withBase('/')} class="hover:text-accent transition-colors">Accueil</a></li>
           <li>/</li>
-          <li><a href="/competences" class="hover:text-accent transition-colors">Compétences</a></li>
+          <li><a href={withBase('/competences')} class="hover:text-accent transition-colors">Compétences</a></li>
           <li>/</li>
           <li class="text-neutral-900 font-medium">{skill.data.title}</li>
         </ol>
@@ -133,7 +134,7 @@ const levelColor = skill.data.level <= 2 ? 'bg-neutral-300' :
           <div class="grid md:grid-cols-2 gap-4">
             {skill.data.relatedProjects.map((projectSlug) => (
               <a 
-                href={`/realisations/${projectSlug}`}
+                href={withBase(`/realisations/${projectSlug}`)}
                 class="flex items-center gap-3 p-4 bg-white border border-neutral-200 rounded-lg hover:shadow-lg hover:border-accent transition-all group"
               >
                 <span class="text-2xl">📁</span>
@@ -152,7 +153,7 @@ const levelColor = skill.data.level <= 2 ? 'bg-neutral-300' :
         <div class="flex justify-between items-center">
           {previousSkill ? (
             <a 
-              href={`/competences/${previousSkill.slug}`}
+              href={withBase(`/competences/${previousSkill.slug}`)}
               class="flex items-center gap-2 px-6 py-3 bg-white border-2 border-neutral-200 rounded-lg hover:border-accent hover:text-accent transition-all group"
             >
               <span class="text-xl">←</span>
@@ -164,7 +165,7 @@ const levelColor = skill.data.level <= 2 ? 'bg-neutral-300' :
           ) : <div></div>}
           
           <a 
-            href="/competences"
+            href={withBase('/competences')}
             class="px-6 py-3 bg-neutral-100 text-neutral-900 rounded-lg hover:bg-neutral-200 transition-colors font-medium"
           >
             Toutes les compétences
@@ -172,7 +173,7 @@ const levelColor = skill.data.level <= 2 ? 'bg-neutral-300' :
 
           {nextSkill ? (
             <a 
-              href={`/competences/${nextSkill.slug}`}
+              href={withBase(`/competences/${nextSkill.slug}`)}
               class="flex items-center gap-2 px-6 py-3 bg-white border-2 border-neutral-200 rounded-lg hover:border-accent hover:text-accent transition-all group"
             >
               <div class="text-right">

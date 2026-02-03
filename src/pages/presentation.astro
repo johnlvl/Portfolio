@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { withBase } from '@utils/url';
 ---
 
 <BaseLayout 
@@ -253,13 +254,13 @@ import BaseLayout from '@layouts/BaseLayout.astro';
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="/competences" 
+              href={withBase('/competences')}
               class="px-8 py-3 bg-neutral-900 text-white rounded-lg hover:bg-accent transition-colors font-medium"
             >
               Découvrir mes compétences
             </a>
             <a 
-              href="/realisations" 
+              href={withBase('/realisations')}
               class="px-8 py-3 bg-white border-2 border-neutral-900 text-neutral-900 rounded-lg hover:bg-neutral-900 hover:text-white transition-colors font-medium"
             >
               Voir mes réalisations

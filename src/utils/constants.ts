@@ -2,6 +2,8 @@
  * Données personnelles centralisées
  */
 
+import { withBase } from './url';
+
 export const PERSONAL_INFO = {
   firstName: 'John',
   lastName: 'Leveil',
@@ -10,7 +12,7 @@ export const PERSONAL_INFO = {
   email: 'leveiljohn@gmail.com',
   phone: '+33 6 XX XX XX XX',
   location: 'Paris, France',
-  profilePhoto: '/images/test.jpg',
+  profilePhoto: withBase('/images/test.jpg'),
   profilePhotoAlt: 'Photo professionnelle de John Leveil',
 } as const;
 
@@ -31,12 +33,12 @@ export const SEO_DEFAULT = {
 } as const;
 
 export const NAVIGATION_MENU = [
-  { label: 'Accueil', href: '/' },
-  { label: 'Présentation', href: '/presentation' },
-  { label: 'Compétences', href: '/competences' },
-  { label: 'Réalisations', href: '/realisations' },
-  { label: 'Parcours', href: '/parcours' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Accueil', href: withBase('/') },
+  { label: 'Présentation', href: withBase('/presentation') },
+  { label: 'Compétences', href: withBase('/competences') },
+  { label: 'Réalisations', href: withBase('/realisations') },
+  { label: 'Parcours', href: withBase('/parcours') },
+  { label: 'Contact', href: withBase('/contact') },
 ] as const;
 
 export const CONTENT_REQUIREMENTS = {

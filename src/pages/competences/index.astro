@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '@utils/url';
 
 // Récupérer toutes les compétences et les trier par ordre
 const allSkills = await getCollection('skills');
@@ -166,13 +167,13 @@ const humanSkills = sortedSkills.filter(skill => skill.data.category === 'humain
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="/realisations" 
+              href={withBase('/realisations')}
               class="px-8 py-3 bg-neutral-900 text-white rounded-lg hover:bg-accent transition-colors font-medium"
             >
               Voir mes réalisations
             </a>
             <a 
-              href="/parcours" 
+              href={withBase('/parcours')}
               class="px-8 py-3 bg-white border-2 border-neutral-900 text-neutral-900 rounded-lg hover:bg-neutral-900 hover:text-white transition-colors font-medium"
             >
               Découvrir mon parcours
