@@ -59,7 +59,7 @@ const humanSkills = sortedSkills.filter(skill => skill.data.category === 'humain
           <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-6">
             {sortedSkills.map((skill) => (
               <a 
-                href={`/competences/${skill.slug}`}
+                href={withBase(`/competences/${skill.slug}`)}
                 class="flex flex-col items-center p-4 bg-white border border-neutral-200 rounded-lg hover:shadow-lg hover:border-accent transition-all group"
               >
                 <span class="text-4xl mb-2">{skill.data.icon}</span>
@@ -89,7 +89,7 @@ const humanSkills = sortedSkills.filter(skill => skill.data.category === 'humain
         <div class="grid md:grid-cols-2 gap-6">
           {technicalSkills.map((skill) => (
             <a 
-              href={`/competences/${skill.slug}`}
+              href={withBase(`/competences/${skill.slug}`)}
               class="group bg-white p-6 border border-neutral-200 rounded-lg hover:shadow-xl hover:border-accent transition-all"
             >
               <div class="flex items-start gap-4">
@@ -129,7 +129,7 @@ const humanSkills = sortedSkills.filter(skill => skill.data.category === 'humain
         <div class="grid md:grid-cols-2 gap-6">
           {humanSkills.map((skill) => (
             <a 
-              href={`/competences/${skill.slug}`}
+              href={withBase(`/competences/${skill.slug}`)}
               class="group bg-white p-6 border border-neutral-200 rounded-lg hover:shadow-xl hover:border-accent transition-all"
             >
               <div class="flex items-start gap-4">
