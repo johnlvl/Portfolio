@@ -1,0 +1,217 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+// Récupérer tous les projets pour la navigation
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
+const currentIndex = sortedProjects.findIndex(p => p.slug === project.slug);
+const previousProject = currentIndex > 0 ? sortedProjects[currentIndex - 1] : null;
+const nextProject = currentIndex < sortedProjects.length - 1 ? sortedProjects[currentIndex + 1] : null;
+
+// Récupérer les compétences associées
+const allSkills = await getCollection('skills');
+const relatedSkills = project.data.relatedSkills 
+  ? allSkills.filter(skill => project.data.relatedSkills?.includes(skill.slug))
+  : [];
+---
+
+<BaseLayout 
+  title={project.data.title}
+  description={project.data.description}
+>
+  <article class="py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Fil d'Ariane -->
+      <nav class="mb-8 text-sm">
+        <ol class="flex items-center gap-2 text-neutral-600">
+          <li><a href="/" class="hover:text-accent transition-colors">Accueil</a></li>
+          <li>/</li>
+          <li><a href="/realisations" class="hover:text-accent transition-colors">Réalisations</a></li>
+          <li>/</li>
+          <li class="text-neutral-900 font-medium">{project.data.title}</li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <!-- Image du projet -->
+        {project.data.image && (
+          <div class="aspect-video rounded-2xl overflow-hidden mb-8 shadow-xl">
+            <img 
+              src={project.data.image} 
+              alt={project.data.title}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        )}
+
+        <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
+          {project.data.title}
+        </h1>
+        
+        <p class="text-xl text-neutral-600 mb-6">
+          {project.data.description}
+        </p>
+
+        <!-- Métadonnées -->
+        <div class="flex flex-wrap gap-6 mb-6 text-sm">
+          <!-- Période -->
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">📅</span>
+            <div>
+              <div class="text-neutral-500 text-xs">Période</div>
+              <div class="font-medium text-neutral-900">
+                {new Date(project.data.startDate).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' })}
+                {project.data.endDate && (
+                  <span>
+                    {' '}- {new Date(project.data.endDate).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' })}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <!-- Contexte -->
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">🎯</span>
+            <div>
+              <div class="text-neutral-500 text-xs">Contexte</div>
+              <div class="font-medium text-neutral-900">{project.data.context}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technologies -->
+        <div class="mb-8">
+          <h3 class="text-sm font-semibold text-neutral-700 mb-3">Technologies utilisées</h3>
+          <div class="flex flex-wrap gap-2">
+            {project.data.technologies.map(tech => (
+              <span class="px-3 py-1.5 text-sm font-medium bg-indigo-100 text-indigo-900 rounded-lg">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </header>
+
+      <!-- Contenu Markdown -->
+      <div class="prose prose-neutral max-w-none mb-16">
+        <Content />
+      </div>
+
+      <style>
+        .prose :global(h2) {
+          font-size: 2rem !important;
+          font-weight: 700 !important;
+          margin-bottom: 1rem !important;
+          margin-top: 3rem !important;
+        }
+        
+        .prose :global(h3) {
+          font-size: 1.2rem !important;
+          font-weight: 700 !important;
+          margin-bottom: 1rem !important;
+          margin-top: 2rem !important;
+        }
+        
+        .prose :global(p) {
+          margin-bottom: 1.5rem !important;
+          line-height: 1.75 !important;
+        }
+        
+        .prose :global(ul) {
+          margin-top: 1rem !important;
+          margin-bottom: 1.5rem !important;
+        }
+        
+        .prose :global(h2 + h3) {
+          margin-top: 1rem !important;
+        }
+      </style>
+
+      <!-- Compétences associées -->
+      {relatedSkills.length > 0 && (
+        <section class="mb-16 p-8 bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-100 rounded-xl">
+          <h2 class="text-2xl font-bold text-neutral-900 mb-6">
+            Compétences mobilisées
+          </h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            {relatedSkills.map(skill => (
+              <a 
+                href={`/competences/${skill.slug}`}
+                class="flex items-center gap-3 p-4 bg-white border border-neutral-200 rounded-lg hover:shadow-lg hover:border-indigo-500 transition-all group"
+              >
+                <span class="text-2xl">{skill.data.icon}</span>
+                <div class="flex-1">
+                  <div class="font-medium text-neutral-900 group-hover:text-indigo-600 transition-colors">
+                    {skill.data.title}
+                  </div>
+                  <div class="text-sm text-neutral-600">{skill.data.category === 'technique' ? 'Technique' : 'Humaine'}</div>
+                </div>
+                <span class="text-indigo-600 group-hover:translate-x-1 transition-transform">→</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Navigation entre projets -->
+      <nav class="pt-12 border-t border-neutral-200">
+        <div class="flex justify-between items-center">
+          {previousProject ? (
+            <a 
+              href={`/realisations/${previousProject.slug}`}
+              class="flex items-center gap-3 text-neutral-600 hover:text-indigo-600 transition-colors group"
+            >
+              <span class="text-2xl group-hover:-translate-x-1 transition-transform">←</span>
+              <div class="text-left">
+                <div class="text-xs text-neutral-500 mb-1">Projet précédent</div>
+                <div class="font-medium">{previousProject.data.title}</div>
+              </div>
+            </a>
+          ) : (
+            <div></div>
+          )}
+
+          <a 
+            href="/realisations"
+            class="px-6 py-3 bg-neutral-100 hover:bg-neutral-200 text-neutral-900 font-medium rounded-lg transition-colors"
+          >
+            Tous les projets
+          </a>
+
+          {nextProject ? (
+            <a 
+              href={`/realisations/${nextProject.slug}`}
+              class="flex items-center gap-3 text-neutral-600 hover:text-indigo-600 transition-colors group"
+            >
+              <div class="text-right">
+                <div class="text-xs text-neutral-500 mb-1">Projet suivant</div>
+                <div class="font-medium">{nextProject.data.title}</div>
+              </div>
+              <span class="text-2xl group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          ) : (
+            <div></div>
+          )}
+        </div>
+      </nav>
+    </div>
+  </article>
+</BaseLayout>
