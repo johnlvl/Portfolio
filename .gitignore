@@ -25,3 +25,8 @@ pnpm-debug.log*
 
 # Copilot reference file
 PORTFOLIO_GUIDE.md
+
+# Playwright test results
+/test-results/
+/playwright-report/
+/playwright/.cache/
