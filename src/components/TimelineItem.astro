@@ -1,0 +1,438 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  experience: CollectionEntry<'experiences'>;
+  index: number;
+}
+
+const { experience, index } = Astro.props;
+const { Content } = await experience.render();
+
+// Formater les dates
+const startDate = new Date(experience.data.startDate);
+const endDate = experience.data.endDate ? new Date(experience.data.endDate) : null;
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' });
+};
+
+// Déterminer l'icône selon le type
+const getIcon = (type: string) => {
+  switch (type) {
+    case 'experience':
+      return '💼';
+    case 'formation':
+      return '🎓';
+    case 'certification':
+      return '🏆';
+    default:
+      return '📌';
+  }
+};
+
+// Déterminer la couleur selon le type
+const getColor = (type: string) => {
+  switch (type) {
+    case 'experience':
+      return 'indigo';
+    case 'formation':
+      return 'green';
+    case 'certification':
+      return 'orange';
+    default:
+      return 'gray';
+  }
+};
+
+const icon = getIcon(experience.data.type);
+const color = getColor(experience.data.type);
+const isEven = index % 2 === 0;
+---
+
+<div class={`timeline-item ${isEven ? 'timeline-item-left' : 'timeline-item-right'}`}>
+  <!-- Point sur la timeline -->
+  <div class="timeline-marker">
+    <div class={`timeline-dot bg-${color}-500`}>
+      <span class="text-2xl">{icon}</span>
+    </div>
+  </div>
+
+  <!-- Contenu de la carte -->
+  <div class={`timeline-content ${isEven ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}`}>
+    <div class="timeline-card bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all p-6 border-2 border-neutral-100 hover:border-indigo-300">
+      <!-- Header -->
+      <div class={`flex items-start gap-4 mb-4 ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'} flex-col`}>
+        <!-- Logo -->
+        {experience.data.logo && (
+          <div class="flex-shrink-0 w-16 h-16 bg-neutral-50 rounded-lg p-2 border border-neutral-200">
+            <img 
+              src={experience.data.logo} 
+              alt={`Logo ${experience.data.organization}`}
+              class="w-full h-full object-contain"
+            />
+          </div>
+        )}
+        
+        <!-- Infos principales -->
+        <div class={`flex-1 ${isEven ? 'md:text-right' : 'md:text-left'} text-left`}>
+          <h3 class="text-xl font-bold text-neutral-900 mb-1">
+            {experience.data.title}
+          </h3>
+          <p class="text-lg text-neutral-700 font-medium mb-2">
+            {experience.data.organization}
+          </p>
+          {experience.data.location && (
+            <p class="text-sm text-neutral-600 mb-2">
+              📍 {experience.data.location}
+            </p>
+          )}
+          <p class={`text-sm font-semibold text-${color}-600`}>
+            📅 {formatDate(startDate)}
+            {endDate ? ` - ${formatDate(endDate)}` : ' - Aujourd\'hui'}
+          </p>
+        </div>
+      </div>
+
+      <!-- Description courte -->
+      <p class={`text-neutral-600 mb-4 ${isEven ? 'md:text-right' : 'md:text-left'} text-left`}>
+        {experience.data.description}
+      </p>
+
+      <!-- Bouton pour voir les détails -->
+      <button
+        data-experience-id={experience.slug}
+        class={`inline-flex items-center gap-2 px-4 py-2 bg-${color}-100 text-${color}-700 rounded-lg hover:bg-${color}-200 transition-colors font-medium`}
+        onclick={`document.getElementById('modal-${experience.slug}').showModal()`}
+      >
+        <span>Voir les détails</span>
+        <span>→</span>
+      </button>
+
+      <!-- Liens vers compétences et projets -->
+      {(experience.data.relatedSkills?.length || experience.data.relatedProjects?.length) && (
+        <div class={`mt-4 pt-4 border-t border-neutral-200 ${isEven ? 'md:text-right' : 'md:text-left'} text-left`}>
+          {experience.data.relatedSkills && experience.data.relatedSkills.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="text-xs text-neutral-500 font-medium">Compétences :</span>
+              {experience.data.relatedSkills.map(skill => (
+                <a 
+                  href={`/competences/${skill}`}
+                  class="text-xs px-2 py-1 bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 transition-colors"
+                >
+                  {skill}
+                </a>
+              ))}
+            </div>
+          )}
+          {experience.data.relatedProjects && experience.data.relatedProjects.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs text-neutral-500 font-medium">Projets :</span>
+              {experience.data.relatedProjects.map(project => (
+                <a 
+                  href={`/realisations/${project}`}
+                  class="text-xs px-2 py-1 bg-purple-50 text-purple-700 rounded hover:bg-purple-100 transition-colors"
+                >
+                  {project}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Modal pour les détails -->
+  <dialog id={`modal-${experience.slug}`} class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn-close">✕</button>
+      </form>
+      
+      <div class="modal-header">
+        <div class="flex items-start gap-4 mb-4">
+          {experience.data.logo && (
+            <div class="flex-shrink-0 w-20 h-20 bg-neutral-50 rounded-lg p-2 border border-neutral-200">
+              <img 
+                src={experience.data.logo} 
+                alt={`Logo ${experience.data.organization}`}
+                class="w-full h-full object-contain"
+              />
+            </div>
+          )}
+          <div class="flex-1">
+            <h3 class="text-2xl font-bold text-neutral-900 mb-2">
+              {experience.data.title}
+            </h3>
+            <p class="text-xl text-neutral-700 font-medium mb-2">
+              {experience.data.organization}
+            </p>
+            {experience.data.location && (
+              <p class="text-sm text-neutral-600 mb-2">
+                📍 {experience.data.location}
+              </p>
+            )}
+            <p class={`text-sm font-semibold text-${color}-600`}>
+              📅 {formatDate(startDate)}
+              {endDate ? ` - ${formatDate(endDate)}` : ' - Aujourd\'hui'}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-content">
+        <Content />
+      </div>
+
+      <div class="modal-footer">
+        <form method="dialog">
+          <button class="btn-primary">
+            Fermer
+          </button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<style>
+  .timeline-item {
+    position: relative;
+    width: 100%;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .timeline-dot {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 4px solid white;
+  }
+
+  .timeline-content {
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-item-left .timeline-content {
+      padding-right: 50%;
+    }
+
+    .timeline-item-right .timeline-content {
+      padding-left: 50%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .timeline-marker {
+      left: 30px;
+    }
+
+    .timeline-content {
+      padding-left: 80px !important;
+      padding-right: 0 !important;
+      text-align: left !important;
+    }
+
+    .timeline-dot {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  /* Modal styles */
+  dialog.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 64rem;
+    width: calc(100% - 2rem);
+    max-height: 90vh;
+    border: none;
+    border-radius: 1rem;
+    padding: 0;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  dialog.modal:not([open]) {
+    display: none;
+  }
+
+  dialog.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-box {
+    background-color: white;
+    padding: 2rem;
+    overflow-y: auto;
+    max-height: 90vh;
+    position: relative;
+  }
+
+  .btn-close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    color: #6b7280;
+  }
+
+  .btn-close:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+  }
+
+  .modal-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-footer {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    background-color: #111827;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .btn-primary:hover {
+    background-color: #1f2937;
+  }
+
+  /* Content styling for markdown */
+  .modal-content {
+    color: #374151;
+    line-height: 1.75;
+  }
+
+  .modal-content :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+    line-height: 1.3;
+  }
+
+  .modal-content :global(h3) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #1f2937;
+    line-height: 1.4;
+  }
+
+  .modal-content :global(h4) {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+    line-height: 1.5;
+  }
+
+  .modal-content :global(p) {
+    margin-bottom: 1rem;
+    margin-top: 0;
+    color: #4b5563;
+    line-height: 1.75;
+  }
+
+  .modal-content :global(ul),
+  .modal-content :global(ol) {
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    color: #4b5563;
+  }
+
+  .modal-content :global(ul) {
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
+  .modal-content :global(ol) {
+    list-style-type: decimal;
+    list-style-position: outside;
+  }
+
+  .modal-content :global(li) {
+    margin-bottom: 0.5rem;
+    line-height: 1.75;
+  }
+
+  .modal-content :global(strong) {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .modal-content :global(em) {
+    font-style: italic;
+  }
+
+  .modal-content :global(blockquote) {
+    border-left: 4px solid #e5e7eb;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  .modal-content :global(code) {
+    background-color: #f3f4f6;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    color: #1f2937;
+    font-family: ui-monospace, monospace;
+  }
+</style>
+
+<script is:inline>
+  // Attendre que le DOM soit complètement chargé
+  document.addEventListener('DOMContentLoaded', function() {
+    // Fermer le modal en cliquant sur le backdrop
+    document.querySelectorAll('dialog.modal').forEach(function(modal) {
+      modal.addEventListener('click', function(e) {
+        const target = e.target;
+        // Fermer si on clique directement sur le dialog (backdrop)
+        if (target.tagName === 'DIALOG') {
+          modal.close();
+        }
+      });
+    });
+  });
+</script>

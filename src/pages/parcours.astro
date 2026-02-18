@@ -1,0 +1,151 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import TimelineItem from '@components/TimelineItem.astro';
+import { getCollection } from 'astro:content';
+
+// Récupérer toutes les expériences
+const experiences = await getCollection('experiences');
+
+// Trier les expériences de manière antichronologique (plus récent en premier)
+const sortedExperiences = experiences.sort((a, b) => {
+  const dateA = new Date(a.data.startDate);
+  const dateB = new Date(b.data.startDate);
+  return dateB.getTime() - dateA.getTime();
+});
+
+// Grouper par type pour les statistiques
+const stats = {
+  experiences: experiences.filter(e => e.data.type === 'experience').length,
+  formations: experiences.filter(e => e.data.type === 'formation').length,
+  certifications: experiences.filter(e => e.data.type === 'certification').length,
+};
+---
+
+<BaseLayout 
+  title="Mon Parcours"
+  description="Parcours professionnel et académique - Expériences, formations et certifications"
+>
+  <div class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <header class="text-center mb-16">
+        <h1 class="text-5xl md:text-6xl font-bold text-neutral-900 mb-6">
+          Mon Parcours
+        </h1>
+        <p class="text-xl text-neutral-600 max-w-3xl mx-auto mb-8">
+          Retour sur mon cheminement professionnel et académique, de mes formations initiales à mes expériences actuelles.
+        </p>
+
+        <!-- Statistiques -->
+        <div class="flex flex-wrap justify-center gap-6 mt-8">
+          <div class="bg-indigo-50 border-2 border-indigo-200 rounded-xl px-6 py-4 text-center">
+            <div class="text-4xl font-bold text-indigo-600">{stats.experiences}</div>
+            <div class="text-sm text-indigo-700 font-medium mt-1">
+              {stats.experiences > 1 ? 'Expériences' : 'Expérience'}
+            </div>
+          </div>
+          <div class="bg-green-50 border-2 border-green-200 rounded-xl px-6 py-4 text-center">
+            <div class="text-4xl font-bold text-green-600">{stats.formations}</div>
+            <div class="text-sm text-green-700 font-medium mt-1">
+              {stats.formations > 1 ? 'Formations' : 'Formation'}
+            </div>
+          </div>
+          <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-6 py-4 text-center">
+            <div class="text-4xl font-bold text-orange-600">{stats.certifications}</div>
+            <div class="text-sm text-orange-700 font-medium mt-1">
+              {stats.certifications > 1 ? 'Certifications' : 'Certification'}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Légende -->
+      <div class="flex flex-wrap justify-center gap-4 mb-12 pb-8 border-b-2 border-neutral-200">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">💼</span>
+          <span class="text-sm font-medium text-neutral-700">Expérience professionnelle</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🎓</span>
+          <span class="text-sm font-medium text-neutral-700">Formation</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🏆</span>
+          <span class="text-sm font-medium text-neutral-700">Certification</span>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="relative">
+        <!-- Ligne centrale de la timeline -->
+        <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-200 via-purple-200 to-pink-200 hidden md:block" style="transform: translateX(-50%);"></div>
+        <div class="absolute left-[30px] top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-200 via-purple-200 to-pink-200 md:hidden"></div>
+
+        <!-- Items de la timeline -->
+        <div class="space-y-12">
+          {sortedExperiences.map((experience, index) => (
+            <TimelineItem experience={experience} index={index} />
+          ))}
+        </div>
+
+        <!-- Marqueur de début -->
+        <div class="flex justify-center mt-12">
+          <div class="w-16 h-16 bg-neutral-200 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+            <span class="text-2xl">🚀</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA vers les compétences et réalisations -->
+      <div class="mt-20 pt-12 border-t-2 border-neutral-200">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-neutral-900 mb-4">
+            Découvrir mes compétences et réalisations
+          </h2>
+          <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+            Explorez les compétences que j'ai développées et les projets concrets que j'ai réalisés tout au long de mon parcours.
+          </p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a 
+            href="/competences"
+            class="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
+          >
+            <span>Mes compétences</span>
+            <span>→</span>
+          </a>
+          <a 
+            href="/realisations"
+            class="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
+          >
+            <span>Mes réalisations</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  /* Animations au scroll */
+  .timeline-item {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+  .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+  .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+  .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
