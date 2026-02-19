@@ -10,17 +10,17 @@ export const PERSONAL_INFO = {
   fullName: 'John Leveil',
   title: 'Expert en Ingénierie du Logiciel',
   email: 'leveiljohn@gmail.com',
-  phone: '+33 6 XX XX XX XX',
-  location: 'Paris, France',
+  phone: '+33 7 82 51 40 05',
+  location: 'Ablis, France',
   profilePhoto: withBase('/images/test.jpg'),
   profilePhotoAlt: 'Photo professionnelle de John Leveil',
 } as const;
 
 export const SOCIAL_LINKS = {
-  github: 'https://github.com/username',
-  linkedin: 'https://linkedin.com/in/username',
+  github: 'https://github.com/johnlvl',
+  linkedin: 'https://www.linkedin.com/in/john-leveil-654b27245',
   twitter: 'https://twitter.com/username',
-  portfolio: 'https://username.github.io',
+  portfolio: 'https://johnlvl.github.io/Portfolio/',
 } as const;
 
 export const SEO_DEFAULT = {
