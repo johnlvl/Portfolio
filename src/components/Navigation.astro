@@ -13,6 +13,9 @@ const currentPath = Astro.url.pathname;
           src={PERSONAL_INFO.profilePhoto} 
           alt={PERSONAL_INFO.profilePhotoAlt}
           class="w-10 h-10 rounded-full object-cover ring-2 ring-neutral-200 group-hover:ring-accent transition-all"
+          width="40"
+          height="40"
+          loading="eager"
         />
         <span class="font-medium text-neutral-900 group-hover:text-accent transition-colors">
           {PERSONAL_INFO.fullName}
