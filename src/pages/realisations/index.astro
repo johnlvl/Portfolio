@@ -38,6 +38,7 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
                   src={project.data.image} 
                   alt={project.data.title}
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
                 />
               ) : (
                 <span class="text-6xl">📁</span>

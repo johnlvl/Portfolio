@@ -4,7 +4,10 @@ import { withBase } from '@utils/url';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@utils/constants';
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Accueil"
+  description={`Portfolio de ${PERSONAL_INFO.fullName}, ${PERSONAL_INFO.title}. Découvrez mes compétences, réalisations et parcours professionnel.`}
+>
   <!-- Hero Section -->
   <section class="min-h-[80vh] flex items-center justify-center px-6">
     <div class="max-w-4xl mx-auto text-center">
@@ -14,6 +17,9 @@ import { PERSONAL_INFO, SOCIAL_LINKS } from '@utils/constants';
           src={PERSONAL_INFO.profilePhoto} 
           alt={PERSONAL_INFO.profilePhotoAlt}
           class="w-32 h-32 rounded-full object-cover mx-auto ring-4 ring-neutral-200"
+          width="128"
+          height="128"
+          loading="eager"
         />
       </div>
 

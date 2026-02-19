@@ -1,5 +1,5 @@
 ---
-import { SEO_DEFAULT } from '@utils/constants';
+import { SEO_DEFAULT, PERSONAL_INFO, SOCIAL_LINKS } from '@utils/constants';
 
 interface Props {
   title?: string;
@@ -14,6 +14,20 @@ const pageTitle = title ? `${title} | ${SEO_DEFAULT.siteName}` : SEO_DEFAULT.sit
 const pageDescription = description || SEO_DEFAULT.description;
 const pageImage = image || '/images/aaa.jpg';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// JSON-LD structuré
+const jsonLd = article ? null : {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": PERSONAL_INFO.fullName,
+  "jobTitle": PERSONAL_INFO.title,
+  "email": PERSONAL_INFO.email,
+  "url": Astro.site?.toString(),
+  "sameAs": [
+    SOCIAL_LINKS.github,
+    SOCIAL_LINKS.linkedin,
+  ],
+};
 ---
 
 <!-- Primary Meta Tags -->
@@ -22,6 +36,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <meta name="description" content={pageDescription} />
 <meta name="author" content={SEO_DEFAULT.author} />
 <meta name="keywords" content={SEO_DEFAULT.keywords.join(', ')} />
+<meta name="robots" content="index, follow" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -33,6 +48,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <meta property="og:description" content={pageDescription} />
 <meta property="og:image" content={new URL(pageImage, Astro.site)} />
 <meta property="og:locale" content={SEO_DEFAULT.locale} />
+<meta property="og:site_name" content={SEO_DEFAULT.siteName} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -49,3 +65,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <!-- Language -->
 <meta http-equiv="Content-Language" content={SEO_DEFAULT.language} />
+
+<!-- JSON-LD Structured Data -->
+{jsonLd && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+)}
