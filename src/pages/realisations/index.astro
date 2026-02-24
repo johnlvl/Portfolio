@@ -35,7 +35,7 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
             <div class="aspect-video bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center overflow-hidden">
               {project.data.image ? (
                 <img 
-                  src={project.data.image} 
+                  src={withBase(project.data.image!)} 
                   alt={project.data.title}
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   loading="lazy"
