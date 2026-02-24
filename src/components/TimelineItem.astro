@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { withBase } from '@utils/url';
 
 interface Props {
   experience: CollectionEntry<'experiences'>;
@@ -67,7 +68,7 @@ const isEven = index % 2 === 0;
         {experience.data.logo && (
           <div class="flex-shrink-0 w-16 h-16 bg-neutral-50 rounded-lg p-2 border border-neutral-200">
             <img 
-              src={experience.data.logo} 
+              src={withBase(experience.data.logo!)} 
               alt={`Logo ${experience.data.organization}`}
               class="w-full h-full object-contain"
               loading="lazy"
@@ -118,7 +119,7 @@ const isEven = index % 2 === 0;
               <span class="text-xs text-neutral-500 font-medium">Compétences :</span>
               {experience.data.relatedSkills.map(skill => (
                 <a 
-                  href={`/competences/${skill}`}
+                  href={withBase(`/competences/${skill}`)}
                   class="text-xs px-2 py-1 bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 transition-colors"
                 >
                   {skill}
@@ -131,7 +132,7 @@ const isEven = index % 2 === 0;
               <span class="text-xs text-neutral-500 font-medium">Projets :</span>
               {experience.data.relatedProjects.map(project => (
                 <a 
-                  href={`/realisations/${project}`}
+                  href={withBase(`/realisations/${project}`)}
                   class="text-xs px-2 py-1 bg-purple-50 text-purple-700 rounded hover:bg-purple-100 transition-colors"
                 >
                   {project}
@@ -156,7 +157,7 @@ const isEven = index % 2 === 0;
           {experience.data.logo && (
             <div class="flex-shrink-0 w-20 h-20 bg-neutral-50 rounded-lg p-2 border border-neutral-200">
               <img 
-                src={experience.data.logo} 
+                src={withBase(experience.data.logo!)} 
                 alt={`Logo ${experience.data.organization}`}
                 class="w-full h-full object-contain"
                 loading="lazy"
