@@ -1,7 +1,7 @@
 ---
 title: "Portfolio professionnel moderne"
 description: "Conception et développement d'un portfolio web moderne avec Astro, présentant compétences et réalisations professionnelles"
-image: "/images/projects/projet-5.jpg"
+image: "/images/projects/Portfolio.png"
 startDate: "2026-01"
 endDate: "2026-02"
 context: "Projet personnel visant à valoriser mon parcours et mes compétences techniques"

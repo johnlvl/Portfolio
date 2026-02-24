@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import TimelineItem from '@components/TimelineItem.astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '@utils/url';
 
 // Récupérer toutes les expériences
 const experiences = await getCollection('experiences');
@@ -108,14 +109,14 @@ const stats = {
         </div>
         <div class="flex flex-wrap justify-center gap-4">
           <a 
-            href="/competences"
+            href={withBase('/competences')}
             class="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
           >
             <span>Mes compétences</span>
             <span>→</span>
           </a>
           <a 
-            href="/realisations"
+            href={withBase('/realisations')}
             class="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
           >
             <span>Mes réalisations</span>

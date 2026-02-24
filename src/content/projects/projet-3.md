@@ -1,7 +1,7 @@
 ---
 title: "Regroupement d'outils internes"
 description: "Refonte d’un site interne pour centraliser les outils utilisés quotidiennement par les collaborateurs"
-image: "/images/projects/projet-3.jpg"
+image: "/images/projects/OI.png"
 startDate: "2024-05"
 endDate: "2024-10"
 context: "Projet interne visant à moderniser et maintenir un portail d’outils collaborateurs"

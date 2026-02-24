@@ -12,14 +12,13 @@ export const PERSONAL_INFO = {
   email: 'leveiljohn@gmail.com',
   phone: '+33 7 82 51 40 05',
   location: 'Ablis, France',
-  profilePhoto: withBase('/images/test.jpg'),
+  profilePhoto: withBase('/images/photo-profil.jpg'),
   profilePhotoAlt: 'Photo professionnelle de John Leveil',
 } as const;
 
 export const SOCIAL_LINKS = {
   github: 'https://github.com/johnlvl',
   linkedin: 'https://www.linkedin.com/in/john-leveil-654b27245',
-  twitter: 'https://twitter.com/username',
   portfolio: 'https://johnlvl.github.io/Portfolio/',
 } as const;
 

@@ -1,7 +1,7 @@
 ---
 title: "Intégration d'un registre PDP"
 description: "Intégration d’un registre PDP au sein du site EBP suite au rachat par CEGID"
-image: "/images/projects/projet-pdp.jpg"
+image: "/images/projects/PDP.png"
 startDate: "2025-04"
 endDate: "2025-08"
 context: "Projet client réalisé en entreprise dans le cadre de l’harmonisation des outils EBP / CEGID"
