@@ -3,12 +3,12 @@ title: "Développeur Web / Alternance"
 type: "experience"
 organization: "EBP Informatique"
 location: "Rambouillet, France"
-logo: "/images/logos/digital-innovations.png"
+logo: "/images/logos/ebp-2025.png"
 startDate: "2023-04"
 endDate: "2024-06"
 description: "Alternance en développement d’applications C# .NET full stack dans un environnement client et interne"
 relatedSkills: ["developpement-web", "architecture-logicielle", "tests-qualite", "devops", "apprentissage-continu", "travail-equipe"]
-relatedProjects: []
+relatedProjects: ["projet-3"]
 ---
 
 ## Mon rôle

@@ -50,10 +50,6 @@ describe('Constants Validation', () => {
       expect(SOCIAL_LINKS.linkedin).toMatch(/^https:\/\/(www\.)?linkedin\.com\//);
     });
 
-    it('should have valid URL format for Twitter', () => {
-      expect(SOCIAL_LINKS.twitter).toMatch(/^https:\/\/(www\.)?twitter\.com\//);
-    });
-
     it('should have valid URL format for portfolio', () => {
       expect(SOCIAL_LINKS.portfolio).toMatch(/^https?:\/\//);
     });

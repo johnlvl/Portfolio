@@ -3,12 +3,12 @@ title: "Développeur Web Full Stack – Alternance"
 type: "experience"
 organization: "EBP Informatique"
 location: "Rambouillet, France"
-logo: "/images/logos/afpa.png"
+logo: "/images/logos/ebp-2025.png"
 startDate: "2024-07"
 endDate: "2026-09"
 description: "Alternance Mastère Expert en Ingénierie Logicielle – Développement web full stack"
 relatedSkills: ["developpement-web", "architecture-logicielle", "devops", "travail-equipe", "apprentissage-continu"]
-relatedProjects: ["projet-1", "projet-2", "projet-3", "projet-4", "projet-5"]
+relatedProjects: ["projet-1", "projet-2", "projet-4", "projet-5"]
 ---
 
 ## Mon rôle

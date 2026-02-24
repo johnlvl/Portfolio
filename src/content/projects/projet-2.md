@@ -1,7 +1,7 @@
 ---
 title: "Mise à jour de version majeure"
 description: "Accompagnement technique et fonctionnel de la montée de version majeure d’un site revendeur/prescripteur"
-image: "/images/projects/projet-2.jpg"
+image: "/images/projects/Version.png"
 startDate: "2025-09"
 endDate: "2025-12"
 context: "Projet client réalisé en entreprise dans le cadre de l’évolution majeure d’un logiciel"
