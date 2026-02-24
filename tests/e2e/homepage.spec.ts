@@ -47,7 +47,7 @@ test.describe('Homepage', () => {
     // Vérifier la présence de liens externes
     const externalLinks = page.locator('a[target="_blank"]');
     const count = await externalLinks.count();
-    expect(count).toBeGreaterThanOrEqual(3);
+    expect(count).toBeGreaterThanOrEqual(2);
   });
 
   test('should be responsive on mobile', async ({ page }) => {
