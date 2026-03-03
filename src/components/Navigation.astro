@@ -1,16 +1,36 @@
 ---
 import { PERSONAL_INFO, NAVIGATION_MENU } from '@utils/constants';
+import { withBase } from '@utils/url';
+import { getCollection } from 'astro:content';
 
 const currentPath = Astro.url.pathname;
+
+const skills = await getCollection('skills');
+const skillsSorted = skills.sort((a, b) => a.data.order - b.data.order);
+
+const projects = await getCollection('projects');
+const projectsSorted = projects.sort((a, b) => a.data.order - b.data.order);
+
+// Entrées avec dropdown
+const DROPDOWN_ITEMS: Record<string, { label: string; href: string }[]> = {
+  'Compétences': skillsSorted.map(s => ({
+    label: s.data.title,
+    href: withBase(`/competences/${s.slug}`),
+  })),
+  'Réalisations': projectsSorted.map(p => ({
+    label: p.data.title,
+    href: withBase(`/realisations/${p.slug}`),
+  })),
+};
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-200">
   <div class="max-w-6xl mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
       <!-- Logo / Identity -->
-      <a href="/" class="flex items-center gap-3 group">
-        <img 
-          src={PERSONAL_INFO.profilePhoto} 
+      <a href={withBase('/')} class="flex items-center gap-3 group">
+        <img
+          src={PERSONAL_INFO.profilePhoto}
           alt={PERSONAL_INFO.profilePhotoAlt}
           class="w-10 h-10 rounded-full object-cover ring-2 ring-neutral-200 group-hover:ring-accent transition-all"
           width="40"
@@ -24,25 +44,62 @@ const currentPath = Astro.url.pathname;
 
       <!-- Desktop Navigation -->
       <ul class="hidden md:flex items-center gap-8">
-        {NAVIGATION_MENU.map((item) => (
-          <li>
-            <a 
-              href={item.href}
-              class:list={[
-                "text-sm font-medium transition-colors",
-                currentPath === item.href 
-                  ? "text-accent" 
-                  : "text-neutral-600 hover:text-neutral-900"
-              ]}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
+        {NAVIGATION_MENU.map((item) => {
+          const dropdownItems = DROPDOWN_ITEMS[item.label];
+          const isActive = currentPath === item.href || currentPath.startsWith(item.href + '/');
+          if (dropdownItems) {
+            return (
+              <li class="relative group">
+                <a
+                  href={item.href}
+                  class:list={[
+                    "text-sm font-medium transition-colors flex items-center gap-1",
+                    isActive ? "text-accent" : "text-neutral-600 hover:text-neutral-900"
+                  ]}
+                >
+                  {item.label}
+                  <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+                <ul class="absolute left-0 top-full mt-1 bg-white border border-neutral-200 rounded-lg shadow-lg py-1 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  {dropdownItems.map((sub) => (
+                    <li>
+                      <a
+                        href={sub.href}
+                        class:list={[
+                          "block px-4 py-2 text-sm transition-colors truncate",
+                          currentPath === sub.href
+                            ? "text-accent font-medium bg-neutral-50"
+                            : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
+                        ]}
+                      >
+                        {sub.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            );
+          }
+          return (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "text-sm font-medium transition-colors",
+                  isActive ? "text-accent" : "text-neutral-600 hover:text-neutral-900"
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
 
       <!-- Mobile Menu Button -->
-      <button 
+      <button
         id="mobile-menu-toggle"
         class="md:hidden p-2 text-neutral-600 hover:text-neutral-900"
         aria-label="Toggle menu"
@@ -55,22 +112,67 @@ const currentPath = Astro.url.pathname;
 
     <!-- Mobile Navigation -->
     <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
-      <ul class="flex flex-col gap-3">
-        {NAVIGATION_MENU.map((item) => (
-          <li>
-            <a 
-              href={item.href}
-              class:list={[
-                "block py-2 text-sm font-medium transition-colors",
-                currentPath === item.href 
-                  ? "text-accent" 
-                  : "text-neutral-600 hover:text-neutral-900"
-              ]}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
+      <ul class="flex flex-col gap-1">
+        {NAVIGATION_MENU.map((item, i) => {
+          const dropdownItems = DROPDOWN_ITEMS[item.label];
+          const isActive = currentPath === item.href || currentPath.startsWith(item.href + '/');
+          if (dropdownItems) {
+            return (
+              <li>
+                <div class="flex items-center justify-between">
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "py-2 text-sm font-medium transition-colors flex-1",
+                      isActive ? "text-accent" : "text-neutral-600 hover:text-neutral-900"
+                    ]}
+                  >
+                    {item.label}
+                  </a>
+                  <button
+                    class="mobile-dropdown-toggle p-1 text-neutral-500"
+                    data-target={`mobile-sub-${i}`}
+                    aria-label={`Ouvrir sous-menu ${item.label}`}
+                  >
+                    <svg class="w-4 h-4 chevron-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </div>
+                <ul id={`mobile-sub-${i}`} class="hidden pl-4 mb-1 space-y-0.5 border-l-2 border-neutral-200">
+                  {dropdownItems.map((sub) => (
+                    <li>
+                      <a
+                        href={sub.href}
+                        class:list={[
+                          "block py-1.5 text-sm transition-colors truncate",
+                          currentPath === sub.href
+                            ? "text-accent font-medium"
+                            : "text-neutral-500 hover:text-neutral-900"
+                        ]}
+                      >
+                        {sub.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            );
+          }
+          return (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "block py-2 text-sm font-medium transition-colors",
+                  isActive ? "text-accent" : "text-neutral-600 hover:text-neutral-900"
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   </div>
@@ -80,8 +182,19 @@ const currentPath = Astro.url.pathname;
   // Mobile menu toggle
   const toggle = document.getElementById('mobile-menu-toggle');
   const menu = document.getElementById('mobile-menu');
-
   toggle?.addEventListener('click', () => {
     menu?.classList.toggle('hidden');
+  });
+
+  // Mobile sub-menu toggles
+  document.querySelectorAll('.mobile-dropdown-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      if (!targetId) return;
+      const submenu = document.getElementById(targetId);
+      submenu?.classList.toggle('hidden');
+      const chevron = btn.querySelector('.chevron-icon');
+      chevron?.classList.toggle('rotate-180');
+    });
   });
 </script>
