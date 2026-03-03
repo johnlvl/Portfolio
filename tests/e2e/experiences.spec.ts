@@ -151,30 +151,36 @@ test.describe('Page Expériences', () => {
 
   test.describe('Liens vers compétences et réalisations', () => {
     test('should display links to related skills when available', async ({ page }) => {
-      // Vérifier si des liens vers les compétences sont présents
-      const skillLinks = page.locator('a[href^="/competences/"]');
+      // Ouvrir le premier modal pour accéder aux liens (ils sont dans les dialogs)
+      await page.locator('button:has-text("Voir les détails")').first().click();
+      const modal = page.locator('dialog[open]');
+      await expect(modal).toBeVisible();
+
+      // Vérifier si des liens vers les compétences sont présents dans le modal ouvert
+      const skillLinks = modal.locator('a[href*="/competences/"]');
       const skillCount = await skillLinks.count();
-      
-      // Il devrait y avoir au moins quelques liens vers des compétences
+
+      // Si des liens existent, vérifier leur visibilité et leur href
       if (skillCount > 0) {
         await expect(skillLinks.first()).toBeVisible();
-        
-        // Vérifier que le lien fonctionne
         const href = await skillLinks.first().getAttribute('href');
         expect(href).toContain('/competences/');
       }
     });
 
     test('should display links to related projects when available', async ({ page }) => {
-      // Vérifier si des liens vers les projets sont présents
-      const projectLinks = page.locator('a[href^="/realisations/"]');
+      // Ouvrir le premier modal pour accéder aux liens (ils sont dans les dialogs)
+      await page.locator('button:has-text("Voir les détails")').first().click();
+      const modal = page.locator('dialog[open]');
+      await expect(modal).toBeVisible();
+
+      // Vérifier si des liens vers les projets sont présents dans le modal ouvert
+      const projectLinks = modal.locator('a[href*="/realisations/"]');
       const projectCount = await projectLinks.count();
-      
-      // Il devrait y avoir au moins quelques liens vers des projets
+
+      // Si des liens existent, vérifier leur visibilité et leur href
       if (projectCount > 0) {
         await expect(projectLinks.first()).toBeVisible();
-        
-        // Vérifier que le lien fonctionne
         const href = await projectLinks.first().getAttribute('href');
         expect(href).toContain('/realisations/');
       }
