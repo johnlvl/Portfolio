@@ -36,7 +36,7 @@ export const NAVIGATION_MENU = [
   { label: 'Présentation', href: withBase('/presentation') },
   { label: 'Compétences', href: withBase('/competences') },
   { label: 'Réalisations', href: withBase('/realisations') },
-  { label: 'Parcours', href: withBase('/parcours') },
+  { label: 'Expériences', href: withBase('/experiences') },
   { label: 'Contact', href: withBase('/contact') },
 ] as const;
 

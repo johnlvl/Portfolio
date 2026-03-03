@@ -91,7 +91,7 @@ describe('Constants Validation', () => {
 
   describe('NAVIGATION_MENU', () => {
     it('should have all required menu items', () => {
-      const requiredLabels = ['Accueil', 'Présentation', 'Compétences', 'Réalisations', 'Parcours', 'Contact'];
+      const requiredLabels = ['Accueil', 'Présentation', 'Compétences', 'Réalisations', 'Expériences', 'Contact'];
       
       requiredLabels.forEach(label => {
         const menuItem = NAVIGATION_MENU.find(item => item.label === label);

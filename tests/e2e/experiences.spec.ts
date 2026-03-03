@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Page Parcours', () => {
+test.describe('Page Expériences', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/parcours');
+    await page.goto('/experiences');
   });
 
   test.describe('Structure de la page', () => {
     test('should display page title and description', async ({ page }) => {
-      await expect(page.locator('h1:has-text("Mon Parcours")')).toBeVisible();
+      await expect(page.locator('h1:has-text("Mes Expériences")')).toBeVisible();
       await expect(page.locator('p:has-text("Retour sur mon cheminement")')).toBeVisible();
     });
 
@@ -20,16 +20,10 @@ test.describe('Page Parcours', () => {
       await expect(statsSection.locator('text=/Certification/').first()).toBeVisible();
     });
 
-    test('should display timeline legend', async ({ page }) => {
-      // Vérifier la légende (section avec les 3 icônes côte à côte)
-      const legend = page.locator('.flex.flex-wrap.justify-center.gap-4.mb-12');
-      await expect(legend).toBeVisible();
-      await expect(legend.locator('text=💼')).toBeVisible();
-      await expect(legend.locator('text=🎓')).toBeVisible();
-      await expect(legend.locator('text=🏆')).toBeVisible();
-      await expect(legend.locator('text=Expérience professionnelle')).toBeVisible();
-      await expect(legend.locator('text=Formation')).toBeVisible();
-      await expect(legend.locator('text=Certification')).toBeVisible();
+    test('should display section titles', async ({ page }) => {
+      // Vérifier les titres des deux sections
+      await expect(page.locator('h2:has-text("Expériences professionnelles")')).toBeVisible();
+      await expect(page.locator('h2:has-text("Formations & Certifications")')).toBeVisible();
     });
   });
 
@@ -207,10 +201,10 @@ test.describe('Page Parcours', () => {
     test.use({ viewport: { width: 375, height: 667 } });
 
     test('should display timeline on mobile', async ({ page }) => {
-      await page.goto('/parcours');
+      await page.goto('/experiences');
       
       // Vérifier que le contenu est visible sur mobile
-      await expect(page.locator('h1:has-text("Mon Parcours")')).toBeVisible();
+      await expect(page.locator('h1:has-text("Mes Expériences")')).toBeVisible();
       
       // Vérifier que les items de la timeline sont visibles
       const timelineItems = page.locator('.timeline-item');
@@ -218,7 +212,7 @@ test.describe('Page Parcours', () => {
     });
 
     test('should open modal on mobile', async ({ page }) => {
-      await page.goto('/parcours');
+      await page.goto('/experiences');
       
       // Cliquer sur "Voir les détails"
       await page.locator('button:has-text("Voir les détails")').first().click();
@@ -228,7 +222,7 @@ test.describe('Page Parcours', () => {
     });
 
     test('should display statistics on mobile', async ({ page }) => {
-      await page.goto('/parcours');
+      await page.goto('/experiences');
       
       // Vérifier que les statistiques sont visibles
       const statsSection = page.locator('.flex.flex-wrap.justify-center.gap-6').first();

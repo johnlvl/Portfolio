@@ -20,18 +20,22 @@ const stats = {
   formations: experiences.filter(e => e.data.type === 'formation').length,
   certifications: experiences.filter(e => e.data.type === 'certification').length,
 };
+
+// Séparer expériences et formations
+const proExperiences = sortedExperiences.filter(e => e.data.type === 'experience');
+const formationItems = sortedExperiences.filter(e => e.data.type === 'formation' || e.data.type === 'certification');
 ---
 
 <BaseLayout 
-  title="Mon Parcours"
-  description="Parcours professionnel et académique - Expériences, formations et certifications"
+  title="Mes Expériences"
+  description="Expériences professionnelles, formations et certifications - Mon parcours académique et professionnel"
 >
   <div class="py-20 px-6">
     <div class="max-w-6xl mx-auto">
       <!-- Header -->
       <header class="text-center mb-16">
         <h1 class="text-5xl md:text-6xl font-bold text-neutral-900 mb-6">
-          Mon Parcours
+          Mes Expériences
         </h1>
         <p class="text-xl text-neutral-600 max-w-3xl mx-auto mb-8">
           Retour sur mon cheminement professionnel et académique, de mes formations initiales à mes expériences actuelles.
@@ -60,34 +64,42 @@ const stats = {
         </div>
       </header>
 
-      <!-- Légende -->
-      <div class="flex flex-wrap justify-center gap-4 mb-12 pb-8 border-b-2 border-neutral-200">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">💼</span>
-          <span class="text-sm font-medium text-neutral-700">Expérience professionnelle</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">🎓</span>
-          <span class="text-sm font-medium text-neutral-700">Formation</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">🏆</span>
-          <span class="text-sm font-medium text-neutral-700">Certification</span>
-        </div>
-      </div>
-
       <!-- Timeline -->
       <div class="relative">
-        <!-- Ligne centrale de la timeline -->
-        <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-200 via-purple-200 to-pink-200 hidden md:block" style="transform: translateX(-50%);"></div>
-        <div class="absolute left-[30px] top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-200 via-purple-200 to-pink-200 md:hidden"></div>
 
-        <!-- Items de la timeline -->
-        <div class="space-y-12">
-          {sortedExperiences.map((experience, index) => (
-            <TimelineItem experience={experience} index={index} />
-          ))}
-        </div>
+        <!-- SECTION : Expériences professionnelles -->
+        <section class="mb-20">
+          <h2 class="text-3xl font-bold text-neutral-900 mb-10 flex items-center gap-3">
+            <span class="text-3xl">💼</span>
+            Expériences professionnelles
+          </h2>
+          <div class="relative">
+            <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-200 to-indigo-400 hidden md:block" style="transform: translateX(-50%);"></div>
+            <div class="absolute left-[30px] top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-200 to-indigo-400 md:hidden"></div>
+            <div class="space-y-12">
+              {proExperiences.map((experience, index) => (
+                <TimelineItem experience={experience} index={index} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION : Formations & Certifications -->
+        <section>
+          <h2 class="text-3xl font-bold text-neutral-900 mb-10 flex items-center gap-3 pt-12 border-t-2 border-neutral-200">
+            <span class="text-3xl">🎓</span>
+            Formations &amp; Certifications
+          </h2>
+          <div class="relative">
+            <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-green-200 to-green-400 hidden md:block" style="transform: translateX(-50%);"></div>
+            <div class="absolute left-[30px] top-0 bottom-0 w-1 bg-gradient-to-b from-green-200 to-green-400 md:hidden"></div>
+            <div class="space-y-12">
+              {formationItems.map((experience, index) => (
+                <TimelineItem experience={experience} index={index} />
+              ))}
+            </div>
+          </div>
+        </section>
 
         <!-- Marqueur de début -->
         <div class="flex justify-center mt-12">

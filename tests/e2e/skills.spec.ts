@@ -76,7 +76,7 @@ test.describe('Skills Page - Grille d\'évaluation (10 points)', () => {
 
   test('devrait avoir des CTAs vers réalisations et parcours', async ({ page }) => {
     await expect(page.getByRole('link', { name: /Voir mes réalisations/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /Découvrir mon parcours/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Découvrir mes expériences/i })).toBeVisible();
   });
 
   test('devrait être accessible depuis le menu principal', async ({ page }) => {
