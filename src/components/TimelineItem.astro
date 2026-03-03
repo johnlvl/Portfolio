@@ -189,6 +189,34 @@ const isEven = index % 2 === 0;
       </div>
 
       <div class="modal-footer">
+        {(experience.data.relatedSkills?.length || experience.data.relatedProjects?.length) && (
+          <div class="modal-links">
+            {experience.data.relatedSkills && experience.data.relatedSkills.length > 0 && (
+              <div class="modal-links-group">
+                <span class="modal-links-label">Compétences associées</span>
+                <div class="modal-links-items">
+                  {experience.data.relatedSkills.map(skill => (
+                    <a href={withBase(`/competences/${skill}`)} class="modal-tag modal-tag-skill">
+                      {skill.replace(/-/g, ' ')}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+            {experience.data.relatedProjects && experience.data.relatedProjects.length > 0 && (
+              <div class="modal-links-group">
+                <span class="modal-links-label">Réalisations associées</span>
+                <div class="modal-links-items">
+                  {experience.data.relatedProjects.map(project => (
+                    <a href={withBase(`/realisations/${project}`)} class="modal-tag modal-tag-project">
+                      {project.replace(/-/g, ' ')}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
         <form method="dialog">
           <button class="btn-primary">
             Fermer
@@ -315,6 +343,67 @@ const isEven = index % 2 === 0;
 
   .modal-footer {
     margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .modal-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .modal-links-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .modal-links-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .modal-links-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .modal-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    text-transform: capitalize;
+  }
+
+  .modal-tag:hover {
+    opacity: 0.8;
+  }
+
+  .modal-tag-skill {
+    background-color: #e0e7ff;
+    color: #3730a3;
+  }
+
+  .modal-tag-project {
+    background-color: #f3e8ff;
+    color: #6b21a8;
+  }
+
+  .modal-footer > form {
     display: flex;
     justify-content: flex-end;
   }
