@@ -3,7 +3,7 @@ title: "Système d’alertes clients multi-niveaux"
 description: "Développement d’un module d’alertes dynamiques intégré à un site de gestion de clients revendeurs"
 image: "/images/projects/Alerte.png"
 startDate: "2026-01"
-endDate: "En cours"
+endDate: "2026-07"
 context: "Projet client visant à enrichir un site de gestion revendeur avec un système d’alertes personnalisées"
 technologies: ["C#", ".NET", "Blazor"]
 relatedSkills: ["developpement-web", "resolution-problemes", "rigueur", "autonomie", "architecture-logicielle"]
