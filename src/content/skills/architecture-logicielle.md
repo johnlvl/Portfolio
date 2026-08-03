@@ -14,22 +14,28 @@ L'architecture logicielle représente la structure fondamentale d'un système, d
 
 ## Éléments de preuve
 
-### Anecdote 1 - Reprise et amélioration de l’architecture front-end d’une application Blazor.
+### Anecdote 1 - Reprise et amélioration de l’architecture front-end d’une application Blazor
 
-L’application consistait à un projet en entreprise se basant sur une architecture front-end en Blazor et back-end en.NET, pour cela, l’application utilisait en grande partie une bibliothèque Blazor modérément interne, rédigée par d’ancien membre de l’équipe.
+L’application était un projet d’entreprise reposant sur une architecture front-end en **Blazor** et back-end en **.NET**. Pour construire ses interfaces, elle s’appuyait en grande partie sur une bibliothèque de composants Blazor **interne**, rédigée quelques années plus tôt par d’anciens membres de l’équipe qui n’étaient plus présents pour la maintenir.
 
-La taille de la bibliothèque était devenue conséquente au fil du temps, rendait le code difficile à comprendre, à maintenir et à faire évoluer. De simples modifications pouvaient entraîner des effets de bord inattendus, ralentissant les évolutions fonctionnelles.
+Au fil du temps, cette bibliothèque avait grossi de façon incontrôlée : elle accumulait des composants très spécifiques, des surcharges successives et beaucoup de logique implicite. Résultat, le code était devenu difficile à comprendre, à maintenir et surtout à faire évoluer. De simples modifications — un changement d’affichage, l’ajout d’un paramètre — pouvaient déclencher des **effets de bord inattendus** sur d’autres écrans, ce qui obligeait à tester manuellement de larges portions de l’application et ralentissait fortement les évolutions fonctionnelles.
 
-De plus, l’absence de conventions de nommage de dossiers, classe, méthode, base de données SQL, ressource Azure, a rendu la lecture et la prise en main encore plus compliquée.
+À ces difficultés s’ajoutait l’**absence totale de conventions de nommage** : les dossiers, classes, méthodes, tables SQL et ressources Azure étaient nommés au cas par cas, selon les habitudes de chacun. Cette hétérogénéité rendait la lecture du projet et la prise en main par un nouvel arrivant particulièrement laborieuses.
 
-Après avoir réalisé ces constats, j’ai proposé la réalisation d'un POC pour permettre de tester une librairie Blazor expérimentée et largement utilisée, qui va garantir une amélioration sur le plan de la maintenabilité ainsi que la pérennité sur le plan technologique. J’ai en parallèle proposé l’organisation d’un brainstorming pour définir ces conventions de nommage.
+Après avoir posé ces constats, j’ai adopté une démarche progressive et argumentée plutôt qu’une refonte brutale. J’ai proposé la réalisation d’un **POC** destiné à évaluer une librairie Blazor éprouvée et largement adoptée par la communauté, afin de mesurer concrètement le gain de maintenabilité et de garantir une meilleure pérennité technologique. En parallèle, j’ai proposé l’organisation d’un **brainstorming d’équipe** pour définir collectivement des conventions de nommage claires, partagées et faciles à appliquer au quotidien.
 
-**Résultat :** L’introduction de conventions de nommage a immédiatement amélioré la lisibilité du code et la compréhension globale de l’architecture. Le POC a démontré que, en standardisant la solution, les évolutions futures seront plus faciles, la maintenance aussi, l’intégration de nouveaux développeurs également, avec un risque moins grand quant à l’enfermement dans une solution devenue trop spécifique et trop vieillissante.
+**Résultat :** L’introduction des conventions de nommage a immédiatement amélioré la lisibilité du code et la compréhension globale de l’architecture. Le POC a démontré qu’en standardisant la solution, les évolutions futures, la maintenance et l’intégration de nouveaux développeurs deviendraient nettement plus simples, tout en réduisant le risque d’enfermement dans une solution trop spécifique et vieillissante.
 
 
-### Anecdote 2
+### Anecdote 2 – Clarification des responsabilités entre le back-end applicatif et l’API interne
 
-Non renseignée volontairement – compétence encore en consolidation
+Sur cette même application **.NET / Blazor**, le back-end applicatif ne se contentait pas de servir le front : il rejouait une partie de la logique métier déjà portée par une **API interne** de l’entreprise. Concrètement, certaines règles étaient dupliquées entre l’API et le back de l’application, et la frontière entre « ce qui relève du métier » et « ce qui relève de l’adaptation des données pour le front » n’était pas clairement posée.
+
+Cette confusion des responsabilités posait un vrai problème d’architecture : toute évolution d’une règle métier devait être répercutée à deux endroits, les risques d’incohérence augmentaient, et le back applicatif devenait un point de complexité difficile à faire évoluer sereinement.
+
+J’ai pris le temps d’analyser les flux de données et de cartographier ce qui devait réellement appartenir à chaque couche. J’ai ensuite proposé de **recentrer les responsabilités** : l’API interne reste la source de vérité du métier, tandis que le back-end applicatif se limite à son rôle d’**intermédiaire et d’adaptateur** (récupération, agrégation et mise en forme des données pour le front). Dans la foulée, j’ai proposé et mis en place une **convention claire pour distinguer les DTOs** issus des tables SQL de ceux liés aux tables Azure, afin de lever les ambiguïtés récurrentes lors des échanges de données.
+
+**Résultat :** Une architecture plus lisible et plus saine, avec une séparation des responsabilités mieux respectée. Les évolutions futures de l’API interne sont devenues moins risquées, la duplication de logique métier a été réduite, et les échanges de données entre couches sont devenus plus explicites pour toute l’équipe.
 
 
 ## Autocritique

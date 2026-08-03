@@ -29,52 +29,50 @@ const humanSkills = sortedSkills.filter(skill => skill.data.category === 'humain
         </p>
       </header>
 
-      <!-- Synthèse graphique -->
-      <section class="mb-20">
-        <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-8">
+      <!-- Vue d'ensemble : synthèse graphique restylée -->
+      <section class="mb-16">
+        <div class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 border border-indigo-100 rounded-2xl p-8 shadow-sm">
           <div class="text-center mb-8">
-            <h2 class="text-2xl font-bold text-neutral-900 mb-2">Vue d'ensemble</h2>
+            <h2 class="text-3xl font-bold text-neutral-900 mb-2">Vue d'ensemble</h2>
             <p class="text-neutral-600">
               {technicalSkills.length} compétences techniques • {humanSkills.length} compétences humaines
             </p>
           </div>
 
-          <!-- Légende des niveaux -->
-          <div class="flex justify-center gap-6 mb-8 flex-wrap">
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 rounded-full bg-neutral-300"></div>
-              <span class="text-sm text-neutral-600">Niveau 1-2 : Débutant</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 rounded-full bg-indigo-400"></div>
-              <span class="text-sm text-neutral-600">Niveau 3 : Intermédiaire</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 rounded-full bg-indigo-600"></div>
-              <span class="text-sm text-neutral-600">Niveau 4-5 : Avancé</span>
-            </div>
-          </div>
-
-          <!-- Visualisation simple des compétences -->
-          <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-6">
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8">
             {sortedSkills.map((skill) => (
-              <a 
+              <a
                 href={withBase(`/competences/${skill.slug}`)}
-                class="flex flex-col items-center p-4 bg-white border border-neutral-200 rounded-lg hover:shadow-lg hover:border-accent transition-all group"
+                class="group flex flex-col items-center gap-2 bg-white rounded-xl border border-neutral-200 p-4 hover:border-indigo-400 hover:shadow-md transition-all"
               >
-                <span class="text-4xl mb-2">{skill.data.icon}</span>
-                <span class="text-sm font-medium text-neutral-900 text-center mb-3 group-hover:text-accent transition-colors">
+                <span class="text-4xl">{skill.data.icon}</span>
+                <span class="text-xs font-medium text-center text-neutral-700 group-hover:text-indigo-600 transition-colors leading-tight">
                   {skill.data.title}
                 </span>
-                <div class="flex gap-1">
+                <div class="flex gap-1 mt-1">
                   {[...Array(5)].map((_, i) => (
-                    <div 
+                    <div
                       class={`w-2 h-2 rounded-full ${i < skill.data.level ? (skill.data.level <= 2 ? 'bg-neutral-300' : skill.data.level === 3 ? 'bg-indigo-400' : 'bg-indigo-600') : 'bg-neutral-200'}`}
                     ></div>
                   ))}
                 </div>
               </a>
             ))}
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-neutral-600">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-neutral-300"></span>
+              Niveau 1-2 : Débutant
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-indigo-400"></span>
+              Niveau 3 : Intermédiaire
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+              Niveau 4-5 : Avancé
+            </div>
           </div>
         </div>
       </section>

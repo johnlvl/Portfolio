@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Système d'alertes clients multi-niveaux">
+  <rect width="800" height="450" fill="#eef2ff"/>
+  <!-- Fenêtre liste d'alertes -->
+  <rect x="200" y="80" width="400" height="290" rx="18" fill="#ffffff" stroke="#c7d2fe" stroke-width="2"/>
+  <rect x="200" y="80" width="400" height="44" rx="18" fill="#4f46e5"/>
+  <text x="400" y="110" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Gestion des alertes</text>
+  <!-- Lignes d'alertes -->
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#312e81">
+    <rect x="230" y="150" width="340" height="48" rx="10" fill="#eef2ff"/>
+    <path d="M255 174 l14 -22 14 22 z" fill="#f59e0b"/>
+    <rect x="300" y="166" width="150" height="14" rx="7" fill="#c7d2fe"/>
+    <rect x="490" y="162" width="56" height="24" rx="8" fill="#6366f1"/>
+
+    <rect x="230" y="210" width="340" height="48" rx="10" fill="#fff7ed"/>
+    <path d="M255 234 l14 -22 14 22 z" fill="#ef4444"/>
+    <rect x="300" y="226" width="180" height="14" rx="7" fill="#fecaca"/>
+    <rect x="490" y="222" width="56" height="24" rx="8" fill="#6366f1"/>
+
+    <rect x="230" y="270" width="340" height="48" rx="10" fill="#eef2ff"/>
+    <circle cx="269" cy="294" r="12" fill="#818cf8"/>
+    <rect x="300" y="286" width="130" height="14" rx="7" fill="#c7d2fe"/>
+    <rect x="490" y="282" width="56" height="24" rx="8" fill="#6366f1"/>
+  </g>
+  <!-- Cloche de notification -->
+  <g transform="translate(560,300)">
+    <circle cx="0" cy="0" r="42" fill="#4f46e5"/>
+    <path d="M0 -22 c-13 0 -20 9 -20 22 v10 l-6 8 h52 l-6 -8 v-10 c0 -13 -7 -22 -20 -22 z" fill="#ffffff"/>
+    <circle cx="0" cy="24" r="6" fill="#ffffff"/>
+    <circle cx="20" cy="-20" r="12" fill="#f59e0b"/>
+    <text x="20" y="-15" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">3</text>
+  </g>
+</svg>

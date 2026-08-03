@@ -16,20 +16,23 @@ L’ingénierie logicielle implique beaucoup de collaboration entre employés �
 
 ### Anecdote 1 – Collaboration sur un projet en autonomie partagée
 
-J’ai contribué à un projet développé de façon autonome, mais cependant, il avait des interdépendances avec le projet de mon collègue. Nos travaux se croisaient régulièrement, notamment lors des modifications de code partagées, ce qui a entraîné des conflits lors de certaines Pull Requests.
+J’ai contribué à un projet développé de façon autonome, mais qui présentait des **interdépendances** avec le projet d’un collègue. Nos travaux se croisaient régulièrement, notamment sur des portions de code partagées, ce qui générait des **conflits lors de certaines Pull Requests** et créait des frictions récurrentes.
 
-En conséquence, plutôt que de traiter ces problèmes séparément, nous avons pris le temps de dialoguer sur la cause du problème, dont principalement manque de lisibilité du code, absence de conventions et périmètres flous.
-Après plusieurs discussions, nous avons établi un modèle de convention et renforcé la communication entre nos partis.
+Plutôt que de traiter ces conflits au cas par cas, comme un simple problème technique à résoudre à chaque fois, nous avons pris le temps d’en chercher ensemble la **cause profonde**. Elle tenait surtout à un manque de lisibilité du code, à l’absence de conventions communes et à des périmètres de responsabilité flous entre nos deux périmètres.
 
-**Résultat :** Moins de conflits dans les PR, et une meilleure compréhension du travail de l'autre.
+Après plusieurs discussions, nous avons établi un **modèle de convention partagé** et renforcé la communication autour des zones sensibles, en nous prévenant mutuellement avant d’intervenir sur du code commun. Cette démarche a transformé une source de tension en une occasion de mieux structurer notre collaboration.
+
+**Résultat :** Nettement moins de conflits dans les Pull Requests, et une bien meilleure compréhension mutuelle du travail de chacun.
 
 ### Anecdote 2 – Contribution et entraide au sein de l’équipe
 
-Bien que je sois junior, je suis un  membre de l’équipe qui propose des solutions. Il m’arrive de travailler à la suite d’autres développeurs. Étant le seul sachant, je prends la casquette de référent fonctionnel ou technique pour garantir la cohésion des savoir-faire et des compétences sur le sujet.
+Bien que junior, je m’efforce d’être un membre **actif et force de proposition** au sein de l’équipe. Il m’arrive de reprendre le travail d’autres développeurs ou d’intervenir sur des sujets sur lesquels je suis le seul à avoir la connaissance : dans ces cas, je prends naturellement la casquette de **référent fonctionnel ou technique**, afin de garantir la cohésion et le partage des savoir-faire plutôt que de conserver l’information pour moi.
 
-Je suis également amené à travailler sur des projets menés en autonomie. Toutefois, je peux être amené à solliciter des seniors. Je le fais dans une perspective de développement de compétences et de compétence commune.
+Je suis également amené à travailler sur des projets menés en autonomie. Cela ne m’empêche pas de **solliciter des profils plus séniors** lorsque c’est pertinent : je le fais dans une logique de montée en compétence et de construction d’une culture technique commune, et non comme un aveu de faiblesse. Demander un avis au bon moment fait, selon moi, partie intégrante d’un bon travail d’équipe.
 
-**Résultat :** Des échanges constructifs, une montée en compétence continue et une dynamique d’équipe basée sur l’entraide plutôt que sur l’isolement.
+Cet équilibre entre autonomie et entraide me permet d’apporter de la valeur tout en continuant à apprendre des autres.
+
+**Résultat :** Des échanges constructifs, une montée en compétence continue et une dynamique d’équipe fondée sur l’entraide plutôt que sur l’isolement.
 
 ## Autocritique
 
