@@ -16,23 +16,23 @@ Automatiser et fiabiliser le cycle de vie des applications et s’assurer qu’i
 
 ### Anecdote 1 – Mise en place de pipelines CI avec GitHub Actions
 
-Sur plusieurs études de cas et projets personnels (dont mon portfolio), j’ai mis en place des pipelines GitHub Actions déclenchés lors des Pull Requests et des merges.
-Ces pipelines automatisent le build et l’exécution des tests unitaires, garantissant un socle de qualité avant toute intégration du code.
+Sur plusieurs études de cas et projets personnels — dont ce **portfolio** — j’ai mis en place des pipelines **GitHub Actions** déclenchés automatiquement lors des Pull Requests et des merges. L’objectif était d’empêcher qu’un code non validé puisse être intégré à la branche principale.
 
-**Résultat :** 
-- Détection précoce des régressions
-- Intégration continue plus fiable
-- Discipline de qualité intégrée dès le développement
+Ces pipelines automatisent le **build** et l’exécution des **tests** à chaque changement, garantissant un socle de qualité minimal avant toute intégration. En pratique, une Pull Request dont le build échoue ou dont les tests ne passent pas ne peut pas être fusionnée, ce qui transforme la qualité en une contrainte automatique plutôt qu’en une vérification manuelle facilement oubliée.
+
+Cette mise en place m’a amené à travailler la configuration des workflows (déclencheurs, étapes, gestion des dépendances et des caches) et à réfléchir à ce qui devait réellement bloquer une intégration.
+
+**Résultat :** Cette automatisation a permis de détecter les régressions de manière précoce, avant même la revue humaine, et de rendre l’intégration continue nettement plus fiable et reproductible. Surtout, elle a ancré une discipline de qualité dès le développement, sans exiger d’effort supplémentaire au quotidien puisque les vérifications sont désormais systématiques et automatiques.
 
 ### Anecdote 2 – Containerisation avec Docker pour simplifier les environnements
 
-Dans des études de cas full-stack, j’ai utilisé Docker pour encapsuler le front, le back et la base de données dans des conteneurs distincts.
-Cette approche a permis de standardiser l’environnement d’exécution et de simplifier les phases de build et de lancement du projet.
+Dans des études de cas full-stack, j’ai utilisé **Docker** pour encapsuler le front, le back et la base de données dans des **conteneurs distincts**, orchestrés ensemble. L’objectif était de rendre l’environnement d’exécution indépendant de la machine de développement.
 
-**Résultat :** 
-- Environnements reproductibles
-- Réduction des problèmes liés aux configurations locales
-- Démarrage rapide des projets
+Avant cette approche, le démarrage d’un projet supposait d’installer et de configurer manuellement chaque brique (runtime, base de données, variables), ce qui était source d’erreurs et de pertes de temps, surtout lorsqu’on changeait de poste ou qu’un nouvel arrivant rejoignait le projet. En décrivant l’environnement dans des fichiers de configuration, j’ai pu **standardiser** son exécution et rendre le lancement du projet reproductible en quelques commandes.
+
+Ce travail m’a fait progresser sur la séparation des responsabilités entre conteneurs, la gestion des variables d’environnement et la simplification des phases de build et de lancement.
+
+**Résultat :** Les environnements sont devenus reproductibles et identiques d’une machine à l’autre, ce qui a fait disparaître une grande partie des problèmes liés aux configurations locales. Le démarrage d’un projet est désormais rapide, y compris pour un nouveau contributeur qui n’a plus besoin de configurer manuellement chaque brique pour commencer à travailler.
 
 ## Autocritique
 

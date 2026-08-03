@@ -16,17 +16,23 @@ La rigueur et l’attention aux détails consistent à produire un travail fiabl
 
 ### Anecdote 1 – Mise en place de conventions pour améliorer la lisibilité
 
-Lors de l’utilisation d’une application professionnelle Blazor, il n’y avait pas de conventions claires: les dossiers, les méthodes et les classes avaient des noms différents, ainsi que les ressources SQL et Azure – tout le monde nommait “à la main” ses propres fichiers et méthodes. Cela a grandement compliqué la compréhension du projet, en particulier lors des changements et de l’ajout de nouveaux membres.
+Sur une application professionnelle **Blazor**, il n’existait aucune convention claire : les dossiers, les méthodes et les classes portaient des noms hétérogènes, tout comme les ressources **SQL** et **Azure**. Chacun nommait « à la main » ses propres fichiers et méthodes, selon ses habitudes. Cette absence de règles compliquait grandement la compréhension du projet, en particulier lors des modifications et de l’arrivée de nouveaux membres, qui devaient à chaque fois « deviner » la logique de nommage.
 
-J’ai proposé de mettre en place des conventions de nommage simples à respecter pour toutes les méthodes et dossiers, ce qui a conduit à la création d’une structure unifiée et modérée du cadre de code.
+Ce manque de rigueur collective avait un coût concret : temps perdu à chercher où se trouvait telle logique, difficulté à anticiper les impacts d’un changement, et revues de code ralenties.
 
-**Résultat :** Une amélioration immédiate de la lisibilité, une meilleure cohérence globale et un gain de temps lors des évolutions et des revues de code.
+J’ai proposé de mettre en place des **conventions de nommage simples et faciles à respecter** pour les méthodes, les classes, les dossiers et les ressources, afin d’aboutir à une structure unifiée. L’enjeu était de trouver des règles suffisamment précises pour être utiles, mais assez légères pour être réellement adoptées au quotidien.
+
+**Résultat :** Une amélioration immédiate de la lisibilité, une meilleure cohérence globale du code et un gain de temps notable lors des évolutions et des revues de code.
 
 ### Anecdote 2 – Qualité et fiabilité renforcées par les contrôles automatisés
 
-Dans mon environnement de développement, la qualité est améliorée par une discipline collective, à savoir l’exécution des tests unitaires avant d’intégrer, les contrôles via pipeline, et l’évaluation continue de la qualité. Pour ma part, j’ai intègré dans ma routine le besoin d’un refactoring à chaque modification dès que je m’attaque à du code plus ancien, et la suppression des points signalés par les outils de qualité pour dissiper les risques potentiels, comme les références nulles, les incohérences, les duplications, etc..
+Dans mon environnement de développement, la qualité repose sur une **discipline collective** : exécution des tests unitaires avant intégration, contrôles automatisés via les pipelines CI, et évaluation continue de la qualité du code. Ce cadre est essentiel, mais il ne suffit pas si chacun ne s’en empare pas au quotidien.
 
-**Résultat :** Les modifications qui sont faites sont plus sûres, ont moins de chances de régresser, et s’améliorent avec le temps.
+Pour ma part, j’ai intégré à ma routine deux réflexes concrets. D’abord, un **refactoring ciblé à chaque intervention** : dès que je touche à du code ancien, je cherche à le laisser un peu plus propre que je ne l’ai trouvé. Ensuite, le **traitement systématique des points remontés par les outils de qualité** (références nulles potentielles, incohérences, duplications), afin de dissiper les risques avant qu’ils ne deviennent des bugs en production.
+
+Cette attention aux détails demande de la constance, mais elle évite l’accumulation silencieuse de dette technique et rend chaque modification plus sûre.
+
+**Résultat :** Les modifications sont plus sûres, ont moins de risques de régresser, et la base de code s’améliore progressivement au fil des interventions plutôt que de se dégrader.
 
 ## Autocritique
 

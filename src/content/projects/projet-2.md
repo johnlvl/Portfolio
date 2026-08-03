@@ -1,7 +1,7 @@
 ---
 title: "Mise à jour de version majeure"
 description: "Accompagnement technique et fonctionnel de la montée de version majeure d’un site revendeur/prescripteur"
-image: "/images/projects/Version.png"
+image: "/images/projects/Version.svg"
 startDate: "2025-09"
 endDate: "2025-12"
 context: "Projet client réalisé en entreprise dans le cadre de l’évolution majeure d’un logiciel"
@@ -12,82 +12,44 @@ order: 2
 
 ## Présentation du projet
 
-Ce projet s’inscrit dans le cadre de la montée de version majeure d’un logiciel de l’entreprise, via un site dédié aux revendeurs et prescripteurs pour la gestion de leurs clients.
-L’objectif principal était d’informer les utilisateurs concernés de l’arrivée prochaine de cette version majeure, de manière ciblée et progressive, tout en leur permettant d’indiquer leur choix concernant cette montée de version.
+Ce projet s’inscrivait dans le cadre de la montée de version majeure d’un logiciel de l’entreprise, à travers un site dédié aux revendeurs et aux prescripteurs pour la gestion de leurs clients. L’objectif principal était d’informer les utilisateurs concernés de l’arrivée prochaine de cette nouvelle version, de manière ciblée et progressive, tout en leur offrant la possibilité d’indiquer leur choix quant à cette montée de version. Il ne s’agissait donc pas seulement d’un développement technique, mais aussi d’un véritable accompagnement au changement, où la manière de communiquer comptait autant que la fonctionnalité elle-même.
 
 ## Objectifs, contexte et enjeux
 
-**Contexte :**  
-La montée de version majeure nécessitait une **communication claire, progressive et différenciée** selon le type de client (revendeur, prescripteur, administrateur), afin d'anticiper les impacts et de préparer les équipes internes à la suite du déploiement.
+La montée de version majeure nécessitait une communication claire, progressive et différenciée selon le type de client — revendeur, prescripteur ou administrateur —, afin d’anticiper les impacts et de préparer les équipes internes aux étapes suivantes du déploiement. Une communication uniforme aurait risqué de noyer les messages importants ou de créer de la confusion chez des utilisateurs aux besoins pourtant très différents.
 
-**Objectifs :**  
-- Mettre à jour le front-end pour afficher des messages adaptés selon le profil client
-- Gérer des **vagues de communication** basées sur des lots fournis par le métier
-- Permettre aux clients d’indiquer leur choix concernant la montée de version
+Concrètement, il fallait mettre à jour le front-end pour afficher des messages adaptés au profil de chaque client, gérer des vagues de communication successives reposant sur des lots fournis par le métier, et permettre à chaque client d’exprimer son choix concernant la montée de version. Cette logique de vagues visait à diffuser l’information de façon maîtrisée et échelonnée, plutôt que d’un seul bloc difficile à absorber.
 
-**Enjeux et risques :**  
-- **Mauvaise compréhension** des messages par les clients
-- **Cohérence** des données entre le front-end, le back-end et les systèmes internes
+Les principaux enjeux tenaient d’une part au risque de mauvaise compréhension des messages par les clients, qui aurait pu générer des inquiétudes ou des demandes de support inutiles, et d’autre part à la cohérence des données entre le front-end, le back-end et les différents systèmes internes qui exploitaient ensuite ces informations.
 
 ## Les étapes – Ce que j'ai fait
 
-1. **Phase de conception**
-    - Analyse du besoin fonctionnel et des règles métier
-    - Identification des différents profils clients et scénarios d’affichage
-    - Définition du modèle de données pour les lots de communication
+**Phase de conception.** J’ai analysé le besoin fonctionnel et les règles métier associées, puis identifié les différents profils clients et les scénarios d’affichage correspondants. J’ai ensuite défini le modèle de données destiné à gérer les lots de communication, en veillant à ce qu’il puisse évoluer au fil des vagues successives.
 
-2. **Phase de développement**
-    - Mise à jour du front-end Blazor avec intégration de composants réutilisables
-    - Gestion des messages dynamiques selon le type de client et son rôle
-    - Création et alimentation d’une table Azure pour gérer les lots et les dates de communication
-    - Développement du back-end pour exposer les données nécessaires au front
-    - Implémentation d’un bouton permettant au client d’accepter ou refuser la montée de version
-    - Communication avec des API internes pour alimenter des tables SQL utilisées par d’autres équipes
+**Phase de développement.** J’ai mis à jour le front-end Blazor en intégrant des composants réutilisables, et développé la gestion des messages dynamiques en fonction du type de client et de son rôle. J’ai créé et alimenté une table Azure pour gérer les lots et les dates de communication, puis développé la partie back-end chargée d’exposer les données nécessaires au front. J’ai également implémenté un bouton permettant à chaque client d’accepter ou de refuser la montée de version, et mis en place la communication avec des API internes afin d’alimenter des tables SQL utilisées par d’autres équipes.
 
-3. **Phase de tests et déploiement**
-    - Tests fonctionnels sur les différents profils clients
-    - Vérification des flux de données entre front, back et systèmes internes
-    - Livraison et mise en production progressive
+**Phase de tests et déploiement.** J’ai mené des tests fonctionnels sur les différents profils clients, vérifié les flux de données entre le front, le back et les systèmes internes, puis assuré la livraison et une mise en production progressive, cohérente avec la logique de vagues du projet.
 
 ## Les acteurs – Les interactions
 
-**Équipe projet :**
-- Moi-même en tant que développeur fullstack et référent technique
-- Équipes métier fournissant les lots de communication
-- Autres équipes techniques consommatrices des données générées
+Sur ce projet, j’ai occupé le rôle de développeur fullstack et de référent technique. J’ai travaillé avec les équipes métier, qui fournissaient les lots de communication, ainsi qu’avec d’autres équipes techniques qui consommaient ensuite les données générées par la solution.
 
-**Collaboration :**
-- Échanges réguliers avec le métier pour affiner les règles de communication
-- Coordination avec les équipes internes utilisant les données issues du projet
-- Rôle de référent pour répondre aux questions techniques liées au sujet
+Cette configuration transverse impliquait beaucoup de coordination. J’échangeais régulièrement avec le métier pour affiner les règles de communication, je me coordonnais avec les équipes internes qui exploitaient les données issues du projet, et j’assurais un rôle de référent en répondant aux questions techniques liées au sujet. Ce positionnement m’a naturellement amené à faire le lien entre des interlocuteurs aux préoccupations différentes.
 
 ## Les résultats
 
-**Pour moi :**
-- Renforcement de mon rôle de référent technique
-- Consolidation de mes compétences fullstack sur un projet transverse
+Sur le plan personnel, ce projet a renforcé mon rôle de référent technique et consolidé mes compétences fullstack sur un projet réellement transverse, touchant à la fois au front, au back, au stockage Azure et aux bases SQL partagées.
 
-**Pour l'entreprise :**  
-- **Communication maîtrisée** et progressive de la montée de version majeure
-- **Centralisation et exploitation** des choix clients par plusieurs équipes
+Pour l’entreprise, la solution a permis une communication maîtrisée et progressive de la montée de version majeure, en limitant nettement les risques de confusion. Elle a également offert une centralisation et une exploitation des choix clients par plusieurs équipes, faisant de ces informations une ressource réutilisable au-delà du seul périmètre initial.
 
 ## Les lendemains du projet
 
-**Court terme :**  
-Projet livré dans les délais et intégré au processus global de montée de version.
-
-**Aujourd'hui :**  
-La solution est utilisée pour piloter les communications et exploiter les choix clients dans les outils internes.
+À court terme, le projet a été livré dans les délais et intégré au processus global de montée de version. Aujourd’hui, la solution est utilisée pour piloter les communications et exploiter les choix des clients dans les outils internes, ce qui prolonge son utilité bien après la phase de développement.
 
 ## Mon regard critique
 
-**Points positifs :**  
-- Bonne anticipation des besoins des différentes équipes
-- Solution **robuste et adaptable** à plusieurs scénarios clients
+Parmi les points positifs, je retiens une bonne anticipation des besoins des différentes équipes et une solution robuste et adaptable à plusieurs scénarios clients, qui a su absorber la diversité des profils et des messages.
 
-**Axes d'amélioration :**  
-- Automatiser davantage l'intégration des lots métier
-- Renforcer les tests automatisés sur les règles d'affichage conditionnelles
+Comme axes d’amélioration, il serait pertinent d’automatiser davantage l’intégration des lots métier, aujourd’hui encore partiellement manuelle, et de renforcer les tests automatisés sur les règles d’affichage conditionnelles, particulièrement nombreuses sur ce type de sujet.
 
-**Leçons apprises :**
-Ce projet m’a appris à gérer un sujet à fort impact transverse, en combinant rigueur, autonomie et communication technique pour garantir la cohérence entre front-end, back-end et systèmes internes.
+Ce projet m’a appris à gérer un sujet à fort impact transverse, en combinant rigueur, autonomie et communication technique pour garantir la cohérence entre le front-end, le back-end et les systèmes internes.
