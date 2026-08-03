@@ -1,7 +1,7 @@
 ---
 title: "Système d’alertes clients multi-niveaux"
 description: "Développement d’un module d’alertes dynamiques intégré à un site de gestion de clients revendeurs"
-image: "/images/projects/Alerte.png"
+image: "/images/projects/Alerte.svg"
 startDate: "2026-01"
 endDate: "2026-07"
 context: "Projet client visant à enrichir un site de gestion revendeur avec un système d’alertes personnalisées"
@@ -12,85 +12,44 @@ order: 4
 
 ## Présentation du projet
 
-Ce projet consiste à concevoir et développer un module d’alertes intégré à un site de gestion de clients destiné aux revendeurs.
-L’objectif est de permettre aux utilisateurs de créer, gérer et suivre des alertes personnalisées, soit pour un client spécifique, soit pour plusieurs clients simultanément, tout en assurant une intégration fluide avec l’architecture existante du site.
+Ce projet consistait à concevoir et développer un module d’alertes intégré à un site de gestion de clients destiné aux revendeurs. L’objectif était de permettre aux utilisateurs de créer, gérer et suivre des alertes personnalisées, qu’il s’agisse d’un client spécifique ou de plusieurs clients simultanément, tout en assurant une intégration fluide avec l’architecture existante du site. L’enjeu consistait donc à enrichir un produit déjà en place sans en dégrader ni la cohérence ni la simplicité d’usage.
 
 ## Objectifs, contexte et enjeux
 
-**Contexte :**  
-Le site existant permet d'afficher un grand nombre de clients via un **datagrid** avec accès à une **page de détail** pour chacun d'eux. Le besoin métier était d'ajouter un système d'alertes directement exploitable dans ces interfaces, sans alourdir l'**expérience utilisateur**.
+Le site existant permettait déjà d’afficher un grand nombre de clients au sein d’un datagrid, avec un accès à une page de détail pour chacun d’eux. Le besoin métier était d’ajouter un système d’alertes directement exploitable au sein de ces interfaces, sans alourdir l’expérience utilisateur ni complexifier des écrans déjà denses.
 
-**Objectifs :**  
-- Développer un système d'alertes par client avec **gestion complète** (création, modification, suppression)
-- Permettre la création d'**alertes en masse** pour plusieurs clients
-- Assurer une **gestion dynamique** des statuts (en cours, terminé, échéance atteinte)
-- Intégrer un système de **notification par email** à échéance
+Plusieurs objectifs guidaient le développement. Il fallait proposer un système d’alertes par client offrant une gestion complète — création, modification et suppression —, mais aussi permettre la création d’alertes en masse pour plusieurs clients à la fois. La solution devait assurer une gestion dynamique des statuts, qu’une alerte soit en cours, terminée ou arrivée à échéance, et intégrer un système de notification par email au moment opportun.
 
-**Enjeux et risques :**  
-- Maintenir des **performances optimales** malgré le volume de clients affichés
-- Garantir la **cohérence des données** entre front-end et back-end
-- Éviter une **complexification excessive** de l'interface utilisateur
+Les enjeux techniques étaient réels. Il s’agissait de maintenir des performances optimales malgré le volume important de clients affichés, de garantir la cohérence des données entre le front-end et le back-end, et d’éviter toute complexification excessive de l’interface, afin que la nouvelle fonctionnalité reste naturelle à utiliser.
 
 ## Les étapes – Ce que j'ai fait
 
-1. **Phase de conception**
-   - Analyse du besoin métier et définition des cas d'usage (**alerte unitaire** et **multi-clients**)
-   - Conception de la structure des alertes (titre, description, date, heure, statut)
-   - Intégration logique du module dans les **datagrids existants**
+**Phase de conception.** J’ai analysé le besoin métier et défini les cas d’usage, en distinguant l’alerte unitaire de l’alerte multi-clients. J’ai conçu la structure des alertes — titre, description, date, heure et statut — puis réfléchi à l’intégration logique du module au sein des datagrids existants, afin qu’il s’inscrive naturellement dans l’architecture en place.
 
-2. **Phase de développement**
-   - Développement d'un **datagrid dynamique** dans la page de détail client
-   - Implémentation des colonnes : titre, description, date, heure, statut, actions
-   - Mise en place des actions (modifier, supprimer) via **tooltip**
-   - Ajout d'un bouton de création d'alerte par client
-   - Développement de la **gestion des statuts dynamiques**
-   - Implémentation de l'**envoi d'email automatique** à échéance
-   - Ajout d'un système de **sélection multi-clients** via cases à cocher dans le datagrid principal
-   - Création des **endpoints backend** et intégration via appels API
+**Phase de développement.** J’ai développé un datagrid dynamique dans la page de détail client, comportant les colonnes titre, description, date, heure, statut et actions. J’ai mis en place les actions de modification et de suppression accessibles via des tooltips, ajouté un bouton de création d’alerte par client, et développé la gestion des statuts dynamiques. J’ai ensuite implémenté l’envoi automatique d’email à échéance, puis ajouté un système de sélection multi-clients par cases à cocher dans le datagrid principal. Enfin, j’ai créé les endpoints backend correspondants et assuré leur intégration via des appels API.
 
-3. **Phase de tests et ajustements**
-   - Tests fonctionnels sur alertes unitaires et groupées
-   - Vérification de la gestion des statuts et des **notifications**
-   - Optimisation des **appels API** et de l'affichage dynamique
+**Phase de tests et ajustements.** J’ai réalisé des tests fonctionnels sur les alertes unitaires comme groupées, vérifié la gestion des statuts et le bon déclenchement des notifications, et optimisé les appels API ainsi que l’affichage dynamique pour préserver la fluidité de l’ensemble.
 
 ## Les acteurs – Les interactions
 
-**Équipe projet :**
-- Moi-même en tant que développeur fullstack
+Sur ce projet, je suis intervenu en tant que développeur fullstack, en prenant en charge l’ensemble de la fonctionnalité, du front-end jusqu’au back-end.
 
-**Collaboration :**
-- Échanges avec le métier pour affiner les règles de gestion des alertes
-- Coordination avec les équipes backend pour structurer les endpoints API
+La collaboration s’est organisée autour de deux axes. J’ai échangé avec le métier pour affiner les règles de gestion des alertes et m’assurer que la fonctionnalité répondait bien aux usages attendus, et je me suis coordonné avec les équipes backend pour structurer les endpoints API de manière cohérente avec le reste du système.
 
 ## Les résultats
 
-**Pour moi :**  
-- Renforcement de mes compétences en conception de **fonctionnalités dynamiques complexes**
-- Consolidation de ma maîtrise des **flux front ↔ back**
-- Approfondissement de ma rigueur dans la **gestion d'états** et de **statuts**
+Sur le plan personnel, ce projet a renforcé mes compétences dans la conception de fonctionnalités dynamiques complexes, consolidé ma maîtrise des flux entre le front et le back, et approfondi ma rigueur dans la gestion des états et des statuts applicatifs, un aspect central sur ce type de module.
 
-**Pour l'entreprise :**  
-- Ajout d'une fonctionnalité à **forte valeur métier**
-- Meilleure **gestion proactive** des clients par les revendeurs
-- Amélioration de l'**expérience utilisateur** sur le site
+Pour l’entreprise, la solution a ajouté une fonctionnalité à forte valeur métier, permettant aux revendeurs une gestion plus proactive de leurs clients. Elle a également contribué à améliorer l’expérience utilisateur sur le site, en apportant un outil utile sans en alourdir la prise en main.
 
 ## Les lendemains du projet
 
-**Court terme :**  
-Déploiement progressif de la fonctionnalité et ajustements selon retours utilisateurs.
-
-**Aujourd'hui :**  
-Projet en cours de développement avec une **base fonctionnelle** déjà intégrée au site.
+À court terme, la fonctionnalité fait l’objet d’un déploiement progressif, accompagné d’ajustements réalisés en fonction des retours des utilisateurs. Aujourd’hui, le projet est encore en cours de développement, mais une base fonctionnelle est déjà intégrée au site et opérationnelle.
 
 ## Mon regard critique
 
-**Points positifs :**  
-- **Intégration cohérente** dans une architecture existante
-- Fonctionnalité **modulable** et **extensible**
+Parmi les points positifs, je retiens une intégration cohérente au sein d’une architecture existante, ainsi qu’une fonctionnalité pensée pour être modulable et extensible, capable d’accueillir de futures évolutions.
 
-**Axes d'amélioration :**  
-- Mettre en place davantage de **tests automatisés**
-- Anticiper les évolutions futures (**historique d'alertes**, **priorisation**, **filtres avancés**)
+Comme axes d’amélioration, il conviendra de mettre en place davantage de tests automatisés pour sécuriser la fonctionnalité dans la durée, et d’anticiper les évolutions futures telles que l’historique des alertes, la priorisation ou encore des filtres avancés.
 
-**Leçons apprises :**  
-Ce projet m'a permis de travailler sur une **fonctionnalité transverse** impactant plusieurs niveaux d'un site existant, en combinant **réflexion UX**, **structuration des données** et **rigueur** dans la gestion des **états applicatifs**.
+Ce projet m’a permis de travailler sur une fonctionnalité transverse impactant plusieurs niveaux d’un site existant, en combinant réflexion UX, structuration des données et rigueur dans la gestion des états applicatifs.

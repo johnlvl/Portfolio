@@ -16,19 +16,23 @@ L’apprentissage continu implique de s’efforcer de rester sur une pente ascen
 
 ### Anecdote 1 – Remise en question et amélioration d’une solution existante
 
-En entreprise, une application Blazor dépendait d’une librairie interne ancienne mais très utilisée, de sorte que le code était difficile à maintenir et très difficile à faire évoluer. Ne voulant pas se contenter de cette réponse, j’ai opté pour une solution progressive. J’ai suggéré de créer un POC pour étudier une alternative plus standardisée et reconnue qui soit mieux maintenue à long terme. 
+En entreprise, une application Blazor dépendait d’une **librairie interne** ancienne mais très utilisée, au point que le code était devenu difficile à maintenir et très risqué à faire évoluer. La réponse la plus simple aurait été de continuer à « faire avec », mais je n’ai pas voulu m’en contenter : accepter une dette technique sans la questionner revient à la faire grossir.
 
-Pour moi, cette expérience s’inscrit dans une pratique d’apprentissage en ce sens qu’elle requiert de mesurer différentes solutions, leurs impacts, et d’orienter la configuration de la pratique de l’équipe vers quelque chose de plus durable.
+J’ai donc adopté une démarche d’apprentissage active. Plutôt que de trancher sur une intuition, j’ai suggéré de créer un **POC** pour étudier une alternative plus standardisée, reconnue par la communauté et mieux maintenue sur le long terme. Cela m’a amené à me documenter, à comparer plusieurs options et à confronter leurs avantages et inconvénients concrets au contexte réel du projet.
 
-**Résultat :** Une base concrète pour décider d’une évolution technique durable, tout en renforçant la maintenabilité et l’évolutivité de l’application.
+Pour moi, cette expérience illustre pleinement l’apprentissage continu : elle exige d’évaluer différentes solutions, d’en mesurer les impacts techniques et humains, et d’orienter progressivement les pratiques de l’équipe vers quelque chose de plus durable plutôt que vers la facilité immédiate.
+
+**Résultat :** Une base de décision concrète et argumentée pour engager une évolution technique durable, tout en renforçant la maintenabilité et l’évolutivité de l’application.
 
 ### Anecdote 2 - Progression par itérations (tests, qualité, pratiques)
 
-Dans mes projets ainsi que dans ma vie professionnelle de tous les jours, j’améliore progressivement mes habitudes afin d’améliorer la qualité de code: ajout de tests unitaires et front (xUnit, Moq, bUnit), replacement de code ancien par des refactorings ciblées et prise en compte des points de qualité identifié, avec SonarQube par exemple.
+Dans mes projets personnels comme dans mon quotidien professionnel, je fais le choix d’améliorer mes habitudes de façon **incrémentale** plutôt que d’attendre une hypothétique « grande remise à niveau ». Concrètement, cela passe par l’ajout de **tests unitaires et front** (xUnit, Moq, bUnit), le remplacement de code ancien par des **refactorings ciblés**, et la prise en compte systématique des points de qualité remontés par des outils comme **SonarQube**.
 
-Cette ajustement progressif est “au fil de l’eau”, je continue d’apprendre, mais tout en apportant de la valeur immédiate pour le projet actuel.
+Cette progression se fait « au fil de l’eau » : à chaque fois que j’interviens sur une portion de code, je cherche à la laisser un peu plus propre et un peu mieux testée que je ne l’ai trouvée. J’apprends ainsi de nouvelles pratiques en continu, tout en apportant une valeur immédiate au projet en cours plutôt qu’en repoussant l’amélioration à plus tard.
 
-**Résultat :** Des évolutions plus sécurisées, un code plus lisible, et une amélioration progressive de la qualité sans bloquer le rythme de développement.
+Ce fonctionnement m’oblige aussi à rester curieux : comprendre pourquoi un outil signale un problème, ce qu’un test protège réellement, ou en quoi un pattern est plus adapté qu’un autre. C’est cette boucle « comprendre → appliquer → constater » qui ancre durablement les apprentissages.
+
+**Résultat :** Des évolutions plus sécurisées, un code plus lisible, et une amélioration progressive et mesurable de la qualité, sans jamais bloquer le rythme de développement.
 
 ## Autocritique
 

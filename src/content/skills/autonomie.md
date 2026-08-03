@@ -17,15 +17,23 @@ L'initiative qui complète l’autonomie, il s’agit de la capacité à propose
 
 ### Anecdote 1 – Prise en charge d’un projet en autonomie
 
-Actuellement, j’ai intégré une équipe et pu mettre en pratique des travaux beaucoup plus menés en grande autonomie, avec des responsabilités sur la conception, et l’implémentation côté front et back. L’autonomie côté back s’est déroulée un peu comme une nécessité d’organiser son travail, de se poser, de se noter ce qu’on veut atteindre, et d’avancer progressivement en essayant de sécuriser ses changements via les PR et les échanges avec l’équipe.
+En intégrant mon équipe actuelle, j’ai rapidement pu prendre en charge des travaux menés en **grande autonomie**, avec des responsabilités allant de la conception jusqu’à l’implémentation, aussi bien côté **front** que côté **back**. Ce type de mission implique de savoir avancer sans qu’on me dise précisément quoi faire à chaque étape.
 
-**Résultat :** Une livraison plus fluide et compréhensible et un meilleur contrôle sur l’intégralité de ce qu’on doit accomplir.
+Pour rester efficace, j’ai mis en place une organisation personnelle simple mais rigoureuse : clarifier le besoin en amont, noter les objectifs à atteindre, découper le travail en étapes et avancer progressivement. Cette discipline m’évite de me disperser et me permet de garder une vision claire de l’avancement, même sur des sujets peu cadrés au départ.
+
+L’autonomie ne signifie pas travailler seul dans son coin : j’ai veillé à **sécuriser mes changements** via des Pull Requests régulières et des échanges avec l’équipe. Ces points de contrôle me permettent de valider mes choix, de recueillir du feedback tôt et d’éviter de partir trop longtemps dans une mauvaise direction.
+
+**Résultat :** Une livraison plus fluide et compréhensible, un meilleur contrôle sur l’intégralité du périmètre à couvrir, et une autonomie qui reste connectée aux attentes de l’équipe.
 
 ### Anecdote 2 – Initiative sur l’amélioration de la lisibilité et de la maintenabilité
 
-Dans le cas d’une application Blazor conséquente, j’ai constaté plusieurs freins à l’innovation : manque de conventions de nommage, visibilité réduite, dépendance à une librairie interne devenue trop complexe. J’ai eu l’occasion de proposer de nouveaux concepts en mettant en place deux actions concrètes : a mise en place de conventions de nommage et un POC exploratoire d’une alternative plus pérenne et standard.
+Sur une application Blazor conséquente, j’ai identifié plusieurs freins à l’évolution du projet : l’absence de conventions de nommage, une visibilité réduite sur l’organisation du code, et une forte dépendance à une librairie interne devenue trop complexe à maintenir. Ces constats n’entraient pas dans le périmètre strict de mes tâches, mais les ignorer aurait revenu à laisser la dette technique s’installer.
 
-**Résultat :** Une lisibilité améliorée immédiatement grâce aux conventions, et une base de décision plus saine pour faire évoluer l’application avec une solution plus pérenne.
+Plutôt que d’attendre qu’on me le demande, j’ai pris l’**initiative** de proposer deux actions concrètes et complémentaires : la mise en place de **conventions de nommage** partagées, applicables immédiatement, et un **POC exploratoire** d’une alternative plus pérenne et standard à la librairie interne. La première apportait un gain rapide et peu risqué ; la seconde ouvrait une piste de fond pour l’avenir.
+
+J’ai veillé à présenter ces propositions de manière factuelle, en m’appuyant sur les problèmes concrets rencontrés par l’équipe, afin qu’elles soient perçues comme une aide et non comme une critique du travail existant.
+
+**Résultat :** Une lisibilité améliorée immédiatement grâce aux conventions, et une base de décision plus saine et documentée pour faire évoluer l’application vers une solution plus durable.
 
 ## Autocritique
 

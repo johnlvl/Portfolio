@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Montée de version majeure d'un logiciel EBP">
+  <rect width="800" height="450" fill="#eef2ff"/>
+  <!-- Fenêtre applicative -->
+  <rect x="180" y="90" width="440" height="270" rx="18" fill="#ffffff" stroke="#c7d2fe" stroke-width="2"/>
+  <rect x="180" y="90" width="440" height="46" rx="18" fill="#4f46e5"/>
+  <circle cx="210" cy="113" r="7" fill="#ffffff" opacity="0.9"/>
+  <circle cx="234" cy="113" r="7" fill="#ffffff" opacity="0.7"/>
+  <circle cx="258" cy="113" r="7" fill="#ffffff" opacity="0.5"/>
+  <text x="560" y="120" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">EBP</text>
+  <!-- Ancienne version -->
+  <rect x="215" y="185" width="150" height="60" rx="12" fill="#e0e7ff"/>
+  <text x="290" y="222" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" fill="#6366f1">v1</text>
+  <!-- Flèche -->
+  <path d="M385 215 h60" stroke="#4338ca" stroke-width="6" stroke-linecap="round"/>
+  <path d="M440 200 l22 15 -22 15 z" fill="#4338ca"/>
+  <!-- Nouvelle version -->
+  <rect x="470" y="185" width="115" height="60" rx="12" fill="#4f46e5"/>
+  <text x="527" y="222" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" fill="#ffffff">v2</text>
+  <!-- Badge mise à jour -->
+  <circle cx="400" cy="305" r="24" fill="#22c55e"/>
+  <path d="M389 305 l8 8 15 -16" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="400" y="392" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#312e81">Mise à jour majeure</text>
+</svg>

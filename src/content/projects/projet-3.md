@@ -1,7 +1,7 @@
 ---
 title: "Regroupement d'outils internes"
 description: "Refonte d’un site interne pour centraliser les outils utilisés quotidiennement par les collaborateurs"
-image: "/images/projects/OI.png"
+image: "/images/projects/OI.svg"
 startDate: "2024-05"
 endDate: "2024-10"
 context: "Projet interne visant à moderniser et maintenir un portail d’outils collaborateurs"
@@ -12,82 +12,44 @@ order: 3
 
 ## Présentation du projet
 
-Ce projet consiste en la refonte complète d’un site interne destiné à regrouper l’ensemble des outils utilisés quotidiennement par les collaborateurs. L’outil existant reposait sur une technologie vieillissante, devenant difficile à maintenir et à faire évoluer.
-L’objectif était de proposer une solution moderne, ergonomique et évolutive, facilitant l’accès aux outils internes et améliorant l’expérience utilisateur.
+Ce projet consistait en la refonte complète d’un site interne destiné à regrouper l’ensemble des outils utilisés quotidiennement par les collaborateurs. L’outil existant reposait sur une technologie vieillissante, devenue difficile à maintenir et à faire évoluer, ce qui pénalisait aussi bien les équipes techniques que les utilisateurs finaux. L’objectif était de proposer une solution moderne, ergonomique et évolutive, facilitant l’accès aux outils internes et améliorant nettement l’expérience utilisateur.
 
 ## Objectifs, contexte et enjeux
 
-**Contexte :**  
-L'entreprise disposait d'un portail interne centralisant la majorité des outils internes, mais celui-ci n'était plus adapté aux besoins actuels, tant sur le plan **technique** que sur l'**ergonomie**.
+L’entreprise disposait d’un portail interne centralisant la majorité de ses outils, mais celui-ci n’était plus adapté aux besoins actuels, tant sur le plan technique que sur celui de l’ergonomie. Il devenait donc urgent de le remettre à niveau avant que son obsolescence ne devienne un frein réel au quotidien.
 
-**Objectifs :**  
-- Refonte du site interne avec une **technologie moderne** et maintenable
-- Amélioration de l'**ergonomie** et de l'**expérience utilisateur**
-- Centralisation claire et structurée des outils par catégories
-- Mise en place d’un espace d’administration pour gérer les outils et menus
+Le projet poursuivait plusieurs objectifs complémentaires. Il s’agissait de refondre le site interne à l’aide d’une technologie moderne et maintenable, d’améliorer l’ergonomie et l’expérience utilisateur, et de centraliser les outils de façon claire et structurée par catégories. Un espace d’administration devait par ailleurs être mis en place afin de permettre la gestion autonome des outils et des menus, sans intervention systématique d’un développeur.
 
-**Enjeux et risques :**  
-- **Adoption** de la nouvelle interface par les collaborateurs
-- Choix technologique **pérenne** pour éviter une nouvelle obsolescence rapide
+Deux enjeux ressortaient particulièrement. Le premier concernait l’adoption de la nouvelle interface par les collaborateurs, condition indispensable pour que la refonte soit réellement utile. Le second portait sur le choix d’une technologie pérenne, afin d’éviter que le nouvel outil ne retombe rapidement dans le même piège d’obsolescence que son prédécesseur.
 
 ## Les étapes – Ce que j'ai fait
 
-1. **Phase de conception**
-   - Analyse des limites de l'outil existant
-   - Définition de l'architecture du nouveau site
-   - Choix de **Blazor** avec la librairie **MudBlazor** pour assurer maintenabilité et cohérence UI
-   - Conception de la navigation (menu latéral, catégories, outils)
+**Phase de conception.** J’ai analysé les limites de l’outil existant pour comprendre ce qui devait absolument être amélioré, puis défini l’architecture du nouveau site. J’ai retenu Blazor associé à la librairie MudBlazor pour garantir à la fois la maintenabilité et la cohérence de l’interface, avant de concevoir la navigation autour d’un menu latéral organisé par catégories et par outils.
 
-2. **Phase de développement**
-   - Développement du front-end avec une interface plus intuitive et **user friendly**
-   - Implémentation du menu latéral par catégories
-   - Gestion des redirections vers les outils internes ou de l'ouverture des logiciels associés
-   - Développement d'un **panneau d'administration** permettant d'ajouter, modifier ou supprimer des menus et outils
-   - Participation au développement back-end en coordination avec mon collègue
+**Phase de développement.** J’ai développé le front-end en cherchant à obtenir une interface plus intuitive et agréable à utiliser, avec un menu latéral structuré par catégories. J’ai géré les redirections vers les outils internes ainsi que l’ouverture des logiciels associés, et développé un panneau d’administration permettant d’ajouter, de modifier ou de supprimer des menus et des outils. J’ai enfin participé au développement du back-end, en coordination avec mon collègue.
 
-3. **Phase de tests et déploiement**
-   - Tests fonctionnels sur les parcours utilisateurs
-   - Vérification des droits administrateurs
-   - Mise en production progressive du nouveau portail interne
+**Phase de tests et déploiement.** J’ai réalisé des tests fonctionnels sur les différents parcours utilisateurs, vérifié la bonne gestion des droits administrateurs, puis assuré une mise en production progressive du nouveau portail interne afin de limiter les risques liés au changement.
 
 ## Les acteurs – Les interactions
 
-**Équipe projet :**
-- Deux développeurs fullstack (dont moi-même), co-référents sur le projet
+Le projet a été mené par deux développeurs fullstack, dont moi-même, en tant que co-référents. Cette organisation en binôme a fortement structuré notre façon de travailler tout au long du projet.
 
-**Collaboration :**
-- Travail en binôme avec répartition des sujets
-- Échanges réguliers pour aligner les choix techniques et fonctionnels
-- Prise de décisions conjointes sur l’architecture et les évolutions
+Nous avons réparti les sujets entre nous tout en maintenant des échanges réguliers pour aligner nos choix techniques et fonctionnels. Les décisions concernant l’architecture et les évolutions étaient prises conjointement, ce qui a permis de conserver une vision cohérente du produit et d’éviter les divergences d’approche entre nos deux périmètres.
 
 ## Les résultats
 
-**Pour moi :**
-- Renforcement de mes compétences en conception d’interface utilisateur
-- Approfondissement de mon rôle de référent technique sur un projet interne
+Sur le plan personnel, ce projet a renforcé mes compétences en conception d’interface utilisateur et approfondi mon rôle de référent technique sur un projet interne, où j’ai pu contribuer activement aux choix structurants.
 
-**Pour l'entreprise :**  
-- Portail interne **modernisé** et plus **intuitif**
-- **Centralisation efficace** des outils utilisés au quotidien
-- Meilleure **maintenabilité** grâce à des choix technologiques adaptés
+Pour l’entreprise, le résultat a été un portail interne modernisé et nettement plus intuitif, offrant une centralisation efficace des outils utilisés au quotidien. Les choix technologiques adaptés ont par ailleurs amélioré la maintenabilité de la solution, la rendant plus simple à faire évoluer dans le temps.
 
 ## Les lendemains du projet
 
-**Court terme :**  
-Adoption rapide du nouvel outil par les collaborateurs et abandon progressif de l'ancien portail.
-
-**Aujourd'hui :**  
-Le site interne est utilisé quotidiennement et peut évoluer facilement grâce à son interface d’administration.
+À court terme, le nouvel outil a été adopté rapidement par les collaborateurs, entraînant l’abandon progressif de l’ancien portail. Aujourd’hui, le site interne est utilisé quotidiennement et peut évoluer facilement grâce à son interface d’administration, ce qui prolonge sa durée de vie et réduit la dépendance à des interventions techniques.
 
 ## Mon regard critique
 
-**Points positifs :**  
-- Choix d'une **technologie** et d'une **librairie** largement utilisées et maintenues
-- Interface claire et adaptée aux usages quotidiens
+Parmi les points positifs, je retiens le choix d’une technologie et d’une librairie largement utilisées et bien maintenues, ainsi qu’une interface claire et adaptée aux usages quotidiens des collaborateurs.
 
-**Axes d'amélioration :**  
-- Ajouter des **statistiques d'utilisation** des outils
-- Mettre en place davantage de tests automatisés
+Comme axes d’amélioration, il serait intéressant d’ajouter des statistiques d’utilisation des outils, afin de mieux comprendre les usages réels et d’orienter les évolutions futures, et de mettre en place davantage de tests automatisés pour sécuriser la maintenance.
 
-**Leçons apprises :**
 Ce projet m’a permis de mesurer l’importance des choix technologiques à long terme et de l’ergonomie dans l’adoption d’un outil interne, tout en consolidant mon travail en équipe et ma capacité à être force de proposition.

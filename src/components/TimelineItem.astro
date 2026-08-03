@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import { withBase } from '@utils/url';
 
 interface Props {
@@ -9,6 +10,11 @@ interface Props {
 
 const { experience, index } = Astro.props;
 const { Content } = await experience.render();
+
+// Associer chaque slug de projet à son vrai titre
+const allProjects = await getCollection('projects');
+const projectTitles = new Map(allProjects.map(p => [p.slug, p.data.title]));
+const getProjectTitle = (slug: string) => projectTitles.get(slug) ?? slug;
 
 // Formater les dates
 const startDate = new Date(experience.data.startDate);
@@ -135,7 +141,7 @@ const isEven = index % 2 === 0;
                   href={withBase(`/realisations/${project}`)}
                   class="text-xs px-2 py-1 bg-purple-50 text-purple-700 rounded hover:bg-purple-100 transition-colors"
                 >
-                  {project}
+                  {getProjectTitle(project)}
                 </a>
               ))}
             </div>
@@ -209,7 +215,7 @@ const isEven = index % 2 === 0;
                 <div class="modal-links-items">
                   {experience.data.relatedProjects.map(project => (
                     <a href={withBase(`/realisations/${project}`)} class="modal-tag modal-tag-project">
-                      {project.replace(/-/g, ' ')}
+                      {getProjectTitle(project)}
                     </a>
                   ))}
                 </div>
