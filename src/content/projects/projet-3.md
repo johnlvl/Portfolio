@@ -6,7 +6,7 @@ startDate: "2024-05"
 endDate: "2024-10"
 context: "Projet interne visant à moderniser et maintenir un portail d’outils collaborateurs"
 technologies: ["C#", ".NET", "Blazor", "MudBlazor"]
-relatedSkills: ["developpement-web", "travail-equipe", "autonomie", "rigueur", "apprentissage-continu"]
+relatedSkills: ["developpement-web", "travail-equipe", "autonomie", "rigueur", "apprentissage-continu", "devops"]
 order: 3
 ---
 

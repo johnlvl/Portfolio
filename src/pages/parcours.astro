@@ -4,38 +4,34 @@ import TimelineItem from '@components/TimelineItem.astro';
 import { getCollection } from 'astro:content';
 import { withBase } from '@utils/url';
 
-// Récupérer toutes les expériences
+// Récupérer toutes les entrées du parcours
 const experiences = await getCollection('experiences');
 
-// Trier les expériences de manière antichronologique (plus récent en premier)
+// Trier de manière antichronologique (plus récent en premier)
 const sortedExperiences = experiences.sort((a, b) => {
   const dateA = new Date(a.data.startDate);
   const dateB = new Date(b.data.startDate);
   return dateB.getTime() - dateA.getTime();
 });
 
-// Grouper par type pour les statistiques
+// Statistiques par type
 const stats = {
   experiences: experiences.filter(e => e.data.type === 'experience').length,
   formations: experiences.filter(e => e.data.type === 'formation').length,
   certifications: experiences.filter(e => e.data.type === 'certification').length,
 };
-
-// Séparer expériences et formations
-const proExperiences = sortedExperiences.filter(e => e.data.type === 'experience');
-const formationItems = sortedExperiences.filter(e => e.data.type === 'formation' || e.data.type === 'certification');
 ---
 
 <BaseLayout 
-  title="Mes Expériences"
-  description="Expériences professionnelles, formations et certifications - Mon parcours académique et professionnel"
+  title="Mon parcours"
+  description="Parcours professionnel, formations et certifications - Mon cheminement académique et professionnel"
 >
   <div class="py-20 px-6">
     <div class="max-w-6xl mx-auto">
       <!-- Header -->
       <header class="text-center mb-16">
         <h1 class="text-5xl md:text-6xl font-bold text-neutral-900 mb-6">
-          Mes Expériences
+          Mon parcours
         </h1>
         <p class="text-xl text-neutral-600 max-w-3xl mx-auto mb-8">
           Retour sur mon cheminement professionnel et académique, de mes formations initiales à mes expériences actuelles.
@@ -64,46 +60,36 @@ const formationItems = sortedExperiences.filter(e => e.data.type === 'formation'
         </div>
       </header>
 
-      <!-- Timeline -->
+      <!-- En-têtes des colonnes (desktop) -->
+      <div class="hidden md:flex mb-6">
+        <h2 class="w-1/2 pr-12 text-right text-2xl font-bold text-indigo-700 flex items-center justify-end gap-2">
+          <span class="text-2xl">💼</span>
+          Expériences professionnelles
+        </h2>
+        <h2 class="w-1/2 pl-12 text-left text-2xl font-bold text-green-700 flex items-center gap-2">
+          Formations &amp; Certifications
+          <span class="text-2xl">🎓</span>
+        </h2>
+      </div>
+
+      <!-- Timeline unique : expériences à gauche, formations & certifications à droite -->
       <div class="relative">
+        <!-- Ligne centrale -->
+        <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-300 via-neutral-200 to-green-400 hidden md:block" style="transform: translateX(-50%);"></div>
+        <div class="absolute left-[30px] top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-300 to-green-400 md:hidden"></div>
 
-        <!-- SECTION : Expériences professionnelles -->
-        <section class="mb-20">
-          <h2 class="text-3xl font-bold text-neutral-900 mb-10 flex items-center gap-3">
-            <span class="text-3xl">💼</span>
-            Expériences professionnelles
-          </h2>
-          <div class="relative">
-            <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-200 to-indigo-400 hidden md:block" style="transform: translateX(-50%);"></div>
-            <div class="absolute left-[30px] top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-200 to-indigo-400 md:hidden"></div>
-            <div class="space-y-12">
-              {proExperiences.map((experience, index) => (
-                <TimelineItem experience={experience} index={index} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <!-- SECTION : Formations & Certifications -->
-        <section>
-          <h2 class="text-3xl font-bold text-neutral-900 mb-10 flex items-center gap-3 pt-12 border-t-2 border-neutral-200">
-            <span class="text-3xl">🎓</span>
-            Formations &amp; Certifications
-          </h2>
-          <div class="relative">
-            <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-green-200 to-green-400 hidden md:block" style="transform: translateX(-50%);"></div>
-            <div class="absolute left-[30px] top-0 bottom-0 w-1 bg-gradient-to-b from-green-200 to-green-400 md:hidden"></div>
-            <div class="space-y-12">
-              {formationItems.map((experience, index) => (
-                <TimelineItem experience={experience} index={index} />
-              ))}
-            </div>
-          </div>
-        </section>
+        <div class="space-y-12">
+          {sortedExperiences.map((experience) => (
+            <TimelineItem
+              experience={experience}
+              side={experience.data.type === 'experience' ? 'left' : 'right'}
+            />
+          ))}
+        </div>
 
         <!-- Marqueur de début -->
         <div class="flex justify-center mt-12">
-          <div class="w-16 h-16 bg-neutral-200 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+          <div class="w-16 h-16 bg-neutral-200 rounded-full flex items-center justify-center border-4 border-white shadow-lg relative z-10">
             <span class="text-2xl">🚀</span>
           </div>
         </div>
@@ -154,6 +140,8 @@ const formationItems = sortedExperiences.filter(e => e.data.type === 'formation'
   .timeline-item:nth-child(4) { animation-delay: 0.4s; }
   .timeline-item:nth-child(5) { animation-delay: 0.5s; }
   .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+  .timeline-item:nth-child(7) { animation-delay: 0.7s; }
+  .timeline-item:nth-child(8) { animation-delay: 0.8s; }
 
   @keyframes fadeInUp {
     to {

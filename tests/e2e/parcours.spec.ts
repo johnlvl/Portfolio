@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Page Expériences', () => {
+test.describe('Page Parcours', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/experiences');
+    await page.goto('/parcours');
   });
 
   test.describe('Structure de la page', () => {
     test('should display page title and description', async ({ page }) => {
-      await expect(page.locator('h1:has-text("Mes Expériences")')).toBeVisible();
+      await expect(page.locator('h1:has-text("Mon parcours")')).toBeVisible();
       await expect(page.locator('p:has-text("Retour sur mon cheminement")')).toBeVisible();
     });
 
@@ -20,28 +20,35 @@ test.describe('Page Expériences', () => {
       await expect(statsSection.locator('text=/Certification/').first()).toBeVisible();
     });
 
-    test('should display section titles', async ({ page }) => {
-      // Vérifier les titres des deux sections
+    test('should display the two column headers (desktop)', async ({ page }) => {
+      // Les en-têtes de colonnes ne sont visibles qu'en vue desktop
+      await page.setViewportSize({ width: 1280, height: 800 });
       await expect(page.locator('h2:has-text("Expériences professionnelles")')).toBeVisible();
       await expect(page.locator('h2:has-text("Formations & Certifications")')).toBeVisible();
     });
   });
 
-  test.describe('Timeline - Ordre antichronologique', () => {
-    test('should display timeline items in reverse chronological order', async ({ page }) => {
-      // Récupérer tous les items de la timeline
+  test.describe('Timeline unique - Positionnement gauche/droite', () => {
+    test('should display experiences on the left and formations on the right (desktop)', async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 800 });
+
+      // Les expériences (💼) sont positionnées à gauche
+      const experienceItem = page.locator('.timeline-item-left:has-text("💼")').first();
+      await expect(experienceItem).toBeVisible();
+
+      // Les formations (🎓) sont positionnées à droite
+      const formationItem = page.locator('.timeline-item-right:has-text("🎓")').first();
+      await expect(formationItem).toBeVisible();
+    });
+
+    test('should display all timeline items in a single timeline', async ({ page }) => {
       const timelineItems = page.locator('.timeline-item');
       const count = await timelineItems.count();
-      
-      // Vérifier qu'il y a au moins quelques items
       expect(count).toBeGreaterThanOrEqual(4);
-      
-      // Vérifier que les items sont bien présents
       await expect(timelineItems.first()).toBeVisible();
     });
 
     test('should display dates in correct format', async ({ page }) => {
-      // Vérifier la présence de dates formatées
       const datePattern = page.locator('text=/📅.*202[0-9]/');
       await expect(datePattern.first()).toBeVisible();
     });
@@ -49,29 +56,16 @@ test.describe('Page Expériences', () => {
 
   test.describe('Timeline Items - Contenu', () => {
     test('should display experience items with required information', async ({ page }) => {
-      // Trouver un item d'expérience (qui contient 💼)
       const experienceItem = page.locator('.timeline-item:has-text("💼")').first();
-      
-      // Vérifier que l'item contient les informations requises
       await expect(experienceItem).toBeVisible();
-      
-      // Vérifier la présence d'un titre dans la timeline-card
       await expect(experienceItem.locator('.timeline-card h3').first()).toBeVisible();
-      
-      // Vérifier la présence d'une organisation
       await expect(experienceItem.locator('.timeline-card p').first()).toBeVisible();
-      
-      // Vérifier la présence d'une période (📅)
       await expect(experienceItem.locator('text=📅').first()).toBeVisible();
-      
-      // Vérifier la présence d'un bouton "Voir les détails"
       await expect(experienceItem.locator('button:has-text("Voir les détails")')).toBeVisible();
     });
 
     test('should display formation items with required information', async ({ page }) => {
-      // Trouver un item de formation (qui contient 🎓)
       const formationItem = page.locator('.timeline-item:has-text("🎓")').first();
-      
       if (await formationItem.count() > 0) {
         await expect(formationItem).toBeVisible();
         await expect(formationItem.locator('.timeline-card h3').first()).toBeVisible();
@@ -80,87 +74,61 @@ test.describe('Page Expériences', () => {
       }
     });
 
-    test('should display certification items with required information', async ({ page }) => {
-      // Trouver un item de certification (qui contient 🏆)
-      const certificationItem = page.locator('.timeline-item:has-text("🏆")').first();
-      
-      if (await certificationItem.count() > 0) {
-        await expect(certificationItem).toBeVisible();
-        await expect(certificationItem.locator('.timeline-card h3').first()).toBeVisible();
-        await expect(certificationItem.locator('text=📅').first()).toBeVisible();
-        await expect(certificationItem.locator('button:has-text("Voir les détails")')).toBeVisible();
-      }
-    });
-
     test('should display organization logos', async ({ page }) => {
-      // Vérifier que les logos sont présents
       const logos = page.locator('.timeline-item img[alt*="Logo"]');
       const logoCount = await logos.count();
-      
-      // Il devrait y avoir au moins un logo
       expect(logoCount).toBeGreaterThan(0);
     });
   });
 
-  test.describe('Détails des expériences - Modal', () => {
-    test('should open modal when clicking "Voir les détails"', async ({ page }) => {
-      // Cliquer sur le premier bouton "Voir les détails"
-      await page.locator('button:has-text("Voir les détails")').first().click();
-      
-      // Vérifier que le modal est ouvert
+  test.describe('Logo cliquable', () => {
+    test('should open modal when clicking an organization logo', async ({ page }) => {
+      // Le logo est un bouton qui ouvre la modale de détails
+      const logoButton = page.locator('.timeline-item .logo-button').first();
+      await expect(logoButton).toBeVisible();
+      await logoButton.click();
+
       const modal = page.locator('dialog[open]');
       await expect(modal).toBeVisible();
-      
-      // Vérifier que le modal contient du contenu
+      await expect(modal.locator('.modal-header h3').first()).toBeVisible();
+    });
+  });
+
+  test.describe('Détails du parcours - Modal', () => {
+    test('should open modal when clicking "Voir les détails"', async ({ page }) => {
+      await page.locator('button:has-text("Voir les détails")').first().click();
+      const modal = page.locator('dialog[open]');
+      await expect(modal).toBeVisible();
       await expect(modal.locator('.modal-header h3').first()).toBeVisible();
     });
 
     test('should close modal when clicking close button', async ({ page }) => {
-      // Ouvrir le modal
       await page.locator('button:has-text("Voir les détails")').first().click();
-      
-      // Vérifier que le modal est ouvert
       await expect(page.locator('dialog[open]')).toBeVisible();
-      
-      // Cliquer sur le bouton fermer
       await page.locator('dialog[open] button:has-text("✕")').first().click();
-      
-      // Attendre un peu
       await page.waitForTimeout(300);
-      
-      // Le modal ne devrait plus être visible (ou plus ouvert)
       const openModals = page.locator('dialog[open]');
       expect(await openModals.count()).toBe(0);
     });
 
     test('should display detailed content in modal', async ({ page }) => {
-      // Ouvrir le modal
       await page.locator('button:has-text("Voir les détails")').first().click();
-      
       const modal = page.locator('dialog[open]');
       await expect(modal).toBeVisible();
-      
-      // Vérifier la présence d'informations détaillées
       await expect(modal.locator('.modal-header h3').first()).toBeVisible();
       await expect(modal.locator('.modal-content')).toBeVisible();
-      
-      // Vérifier la présence du bouton fermer
       await expect(modal.locator('button:has-text("Fermer")')).toBeVisible();
     });
   });
 
   test.describe('Liens vers compétences et réalisations', () => {
     test('should display links to related skills when available', async ({ page }) => {
-      // Ouvrir le premier modal pour accéder aux liens (ils sont dans les dialogs)
       await page.locator('button:has-text("Voir les détails")').first().click();
       const modal = page.locator('dialog[open]');
       await expect(modal).toBeVisible();
 
-      // Vérifier si des liens vers les compétences sont présents dans le modal ouvert
       const skillLinks = modal.locator('a[href*="/competences/"]');
       const skillCount = await skillLinks.count();
-
-      // Si des liens existent, vérifier leur visibilité et leur href
       if (skillCount > 0) {
         await expect(skillLinks.first()).toBeVisible();
         const href = await skillLinks.first().getAttribute('href');
@@ -169,16 +137,12 @@ test.describe('Page Expériences', () => {
     });
 
     test('should display links to related projects when available', async ({ page }) => {
-      // Ouvrir le premier modal pour accéder aux liens (ils sont dans les dialogs)
       await page.locator('button:has-text("Voir les détails")').first().click();
       const modal = page.locator('dialog[open]');
       await expect(modal).toBeVisible();
 
-      // Vérifier si des liens vers les projets sont présents dans le modal ouvert
       const projectLinks = modal.locator('a[href*="/realisations/"]');
       const projectCount = await projectLinks.count();
-
-      // Si des liens existent, vérifier leur visibilité et leur href
       if (projectCount > 0) {
         await expect(projectLinks.first()).toBeVisible();
         const href = await projectLinks.first().getAttribute('href');
@@ -207,30 +171,20 @@ test.describe('Page Expériences', () => {
     test.use({ viewport: { width: 375, height: 667 } });
 
     test('should display timeline on mobile', async ({ page }) => {
-      await page.goto('/experiences');
-      
-      // Vérifier que le contenu est visible sur mobile
-      await expect(page.locator('h1:has-text("Mes Expériences")')).toBeVisible();
-      
-      // Vérifier que les items de la timeline sont visibles
+      await page.goto('/parcours');
+      await expect(page.locator('h1:has-text("Mon parcours")')).toBeVisible();
       const timelineItems = page.locator('.timeline-item');
       await expect(timelineItems.first()).toBeVisible();
     });
 
     test('should open modal on mobile', async ({ page }) => {
-      await page.goto('/experiences');
-      
-      // Cliquer sur "Voir les détails"
+      await page.goto('/parcours');
       await page.locator('button:has-text("Voir les détails")').first().click();
-      
-      // Vérifier que le modal s'ouvre
       await expect(page.locator('dialog[open]')).toBeVisible();
     });
 
     test('should display statistics on mobile', async ({ page }) => {
-      await page.goto('/experiences');
-      
-      // Vérifier que les statistiques sont visibles
+      await page.goto('/parcours');
       const statsSection = page.locator('.flex.flex-wrap.justify-center.gap-6').first();
       await expect(statsSection.locator('text=/Expérience/').first()).toBeVisible();
     });
@@ -238,14 +192,9 @@ test.describe('Page Expériences', () => {
 
   test.describe('Accessibilité', () => {
     test('should have proper heading hierarchy', async ({ page }) => {
-      // Vérifier la hiérarchie des titres
       await expect(page.locator('h1')).toHaveCount(1);
-      
-      // Vérifier qu'il y a des h3 visibles dans la timeline
       const visibleH3 = page.locator('.timeline-card h3').first();
       await expect(visibleH3).toBeVisible();
-      
-      // Vérifier qu'il y a un h2 visible dans la section CTA
       const ctaH2 = page.locator('text=Découvrir mes compétences et réalisations');
       await expect(ctaH2).toBeVisible();
     });
@@ -253,8 +202,6 @@ test.describe('Page Expériences', () => {
     test('should have alt text for images', async ({ page }) => {
       const images = page.locator('img[alt*="Logo"]');
       const count = await images.count();
-      
-      // Vérifier que toutes les images ont un alt
       for (let i = 0; i < count; i++) {
         const alt = await images.nth(i).getAttribute('alt');
         expect(alt).toBeTruthy();

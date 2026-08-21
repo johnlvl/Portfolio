@@ -25,6 +25,12 @@ const currentIndex = sortedSkills.findIndex(s => s.slug === skill.slug);
 const previousSkill = currentIndex > 0 ? sortedSkills[currentIndex - 1] : null;
 const nextSkill = currentIndex < sortedSkills.length - 1 ? sortedSkills[currentIndex + 1] : null;
 
+// Réalisations qui mobilisent cette compétence (relation inversée depuis les projets)
+const allProjects = await getCollection('projects');
+const relatedProjects = allProjects
+  .filter(p => p.data.relatedSkills?.includes(skill.slug))
+  .sort((a, b) => a.data.order - b.data.order);
+
 // Niveau en texte
 const levelText = skill.data.level === 1 ? 'Débutant' :
                   skill.data.level === 2 ? 'Débutant avancé' :
@@ -126,20 +132,20 @@ const levelColor = skill.data.level <= 2 ? 'bg-neutral-300' :
       </style>
 
       <!-- Réalisations associées -->
-      {skill.data.relatedProjects && skill.data.relatedProjects.length > 0 && (
+      {relatedProjects.length > 0 && (
         <section class="mb-16 p-8 bg-neutral-50 border border-neutral-200 rounded-xl">
           <h2 class="text-2xl font-bold text-neutral-900 mb-6">
             Réalisations associées
           </h2>
           <div class="grid md:grid-cols-2 gap-4">
-            {skill.data.relatedProjects.map((projectSlug) => (
+            {relatedProjects.map((project) => (
               <a 
-                href={withBase(`/realisations/${projectSlug}`)}
+                href={withBase(`/realisations/${project.slug}`)}
                 class="flex items-center gap-3 p-4 bg-white border border-neutral-200 rounded-lg hover:shadow-lg hover:border-accent transition-all group"
               >
                 <span class="text-2xl">📁</span>
                 <span class="font-medium text-neutral-900 group-hover:text-accent transition-colors">
-                  {projectSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                  {project.data.title}
                 </span>
                 <span class="ml-auto text-accent">→</span>
               </a>
