@@ -9,6 +9,7 @@ export default defineConfig({
   site: 'https://johnlvl.github.io',
   base: process.env.NODE_ENV === 'production' ? '/Portfolio' : '/',
   output: 'static',
+  devToolbar: { enabled: false },
   integrations: [
     sitemap(),
   ],
