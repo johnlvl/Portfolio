@@ -5,10 +5,10 @@ import { withBase } from '@utils/url';
 
 interface Props {
   experience: CollectionEntry<'experiences'>;
-  index: number;
+  side: 'left' | 'right';
 }
 
-const { experience, index } = Astro.props;
+const { experience, side } = Astro.props;
 const { Content } = await experience.render();
 
 // Associer chaque slug de projet à son vrai titre
@@ -54,10 +54,10 @@ const getColor = (type: string) => {
 
 const icon = getIcon(experience.data.type);
 const color = getColor(experience.data.type);
-const isEven = index % 2 === 0;
+const isLeft = side === 'left';
 ---
 
-<div class={`timeline-item ${isEven ? 'timeline-item-left' : 'timeline-item-right'}`}>
+<div class={`timeline-item ${isLeft ? 'timeline-item-left' : 'timeline-item-right'}`}>
   <!-- Point sur la timeline -->
   <div class="timeline-marker">
     <div class={`timeline-dot bg-${color}-500`}>
@@ -66,24 +66,29 @@ const isEven = index % 2 === 0;
   </div>
 
   <!-- Contenu de la carte -->
-  <div class={`timeline-content ${isEven ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}`}>
+  <div class={`timeline-content ${isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}`}>
     <div class="timeline-card bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all p-6 border-2 border-neutral-100 hover:border-indigo-300">
       <!-- Header -->
-      <div class={`flex items-start gap-4 mb-4 ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'} flex-col`}>
-        <!-- Logo -->
+      <div class={`flex items-start gap-4 mb-4 ${isLeft ? 'md:flex-row-reverse' : 'md:flex-row'} flex-col`}>
+        <!-- Logo cliquable : ouvre la modale de détails -->
         {experience.data.logo && (
-          <div class="flex-shrink-0 w-16 h-16 bg-neutral-50 rounded-lg p-2 border border-neutral-200">
+          <button
+            type="button"
+            onclick={`document.getElementById('modal-${experience.slug}').showModal()`}
+            aria-label={`Voir les détails : ${experience.data.organization}`}
+            class="logo-button flex-shrink-0 w-16 h-16 bg-neutral-50 rounded-lg p-2 border border-neutral-200 cursor-pointer transition-all duration-200 hover:scale-110 hover:-rotate-3 hover:border-indigo-300 hover:shadow-md"
+          >
             <img 
               src={withBase(experience.data.logo!)} 
               alt={`Logo ${experience.data.organization}`}
               class="w-full h-full object-contain"
               loading="lazy"
             />
-          </div>
+          </button>
         )}
         
         <!-- Infos principales -->
-        <div class={`flex-1 ${isEven ? 'md:text-right' : 'md:text-left'} text-left`}>
+        <div class={`flex-1 ${isLeft ? 'md:text-right' : 'md:text-left'} text-left`}>
           <h3 class="text-xl font-bold text-neutral-900 mb-1">
             {experience.data.title}
           </h3>
@@ -103,7 +108,7 @@ const isEven = index % 2 === 0;
       </div>
 
       <!-- Description courte -->
-      <p class={`text-neutral-600 mb-4 ${isEven ? 'md:text-right' : 'md:text-left'} text-left`}>
+      <p class={`text-neutral-600 mb-4 ${isLeft ? 'md:text-right' : 'md:text-left'} text-left`}>
         {experience.data.description}
       </p>
 
@@ -119,7 +124,7 @@ const isEven = index % 2 === 0;
 
       <!-- Liens vers compétences et projets -->
       {(experience.data.relatedSkills?.length || experience.data.relatedProjects?.length) && (
-        <div class={`mt-4 pt-4 border-t border-neutral-200 ${isEven ? 'md:text-right' : 'md:text-left'} text-left`}>
+        <div class={`mt-4 pt-4 border-t border-neutral-200 ${isLeft ? 'md:text-right' : 'md:text-left'} text-left`}>
           {experience.data.relatedSkills && experience.data.relatedSkills.length > 0 && (
             <div class="flex flex-wrap gap-2 mb-2">
               <span class="text-xs text-neutral-500 font-medium">Compétences :</span>

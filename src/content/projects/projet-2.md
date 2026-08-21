@@ -6,7 +6,7 @@ startDate: "2025-09"
 endDate: "2025-12"
 context: "Projet client réalisé en entreprise dans le cadre de l’évolution majeure d’un logiciel"
 technologies: ["C#", ".NET", "Blazor", "Azure Table Storage", "SQL Server"]
-relatedSkills: ["developpement-web", "autonomie", "rigueur", "communication", "travail-equipe"]
+relatedSkills: ["developpement-web", "autonomie", "rigueur", "communication", "travail-equipe", "tests-qualite"]
 order: 2
 ---
 

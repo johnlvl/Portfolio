@@ -6,7 +6,7 @@ startDate: "2026-01"
 endDate: "2026-02"
 context: "Projet personnel visant à valoriser mon parcours et mes compétences techniques"
 technologies: ["Astro", "TypeScript", "TailwindCSS", "Playwright", "GitHub Actions"]
-relatedSkills: ["developpement-web", "architecture-logicielle", "autonomie", "rigueur", "apprentissage-continu"]
+relatedSkills: ["developpement-web", "architecture-logicielle", "autonomie", "rigueur", "apprentissage-continu", "devops", "tests-qualite"]
 order: 5
 ---
 

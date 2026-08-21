@@ -2,7 +2,7 @@
 title: "DevOps et déploiement continu"
 description: "Automatisation des processus de build, test et déploiement"
 category: "technique"
-level: 2
+level: 3
 icon: "🚀"
 order: 4
 relatedProjects: []
